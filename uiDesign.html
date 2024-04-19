@@ -66,13 +66,20 @@
         <img src="https://digital.kenyon.edu/baly/1756/preview.jpg" class="card-img-top" alt="...">
         <div class="card-body">
          <h5 class="card-title">
-           <% product.title %>
+           <%= product.title %>
          </h5>
          <p class="card-text">
-          A product
+          <%= product.desc %>
          </p>
         </div>
       </div>
     </div>
   <% end %>
+  
+  <script>
+    rm=document.querySelector('.active');
+    rm.classList.remove("active");
+    add=document.getElementById("productsLink");
+    add.classList.add("active");
+  </script>
 </div>
