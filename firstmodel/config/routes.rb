@@ -11,4 +11,8 @@ Rails.application.routes.draw do
   get "/brands", to: "brands#index"
   # Defines the root path route ("/")
   # root "posts#index"
+
+  resources :brands do
+    resources :products
+  end
 end
