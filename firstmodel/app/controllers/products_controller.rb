@@ -1,9 +1,10 @@
 class ProductsController < ApplicationController
   def index
     @products = Product.all
-    puts @products
-    @products.each do |prod|
-      puts prod.title
-    end
+  end
+  
+  def show
+    @product = Product.find(params[:id])
+    @brand=Brand.find(@product.brand_id)
   end
 end

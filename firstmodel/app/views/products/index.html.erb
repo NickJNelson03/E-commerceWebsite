@@ -38,7 +38,9 @@
         <img src="https://digital.kenyon.edu/baly/1756/preview.jpg" class="card-img-top" alt="...">
         <div class="card-body">
         <h5 class="card-title">
-          <%= product.title %>
+          <a href="/products/<%= product.id %>">
+            <%= product.title %>
+          </a>
         </h5>
         <div class="card-text container text-center">
           <div class="row align-items-end">
