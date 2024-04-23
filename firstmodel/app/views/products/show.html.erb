@@ -1,0 +1,15 @@
+<h1> <%= @product.title %> </h1>
+
+<ul>
+Current Data
+
+<li> <%= @product.desc %> </li>
+<li> <%= @product.price %> </li>
+<li> <%= @product.stock %> </li>
+<li> 
+  <a href="/brands/<%= @brand.id %>"> 
+    <%= @brand.name %>
+  </a> 
+</li>
+
+</ul>
