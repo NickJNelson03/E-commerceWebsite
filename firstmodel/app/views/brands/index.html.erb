@@ -1,19 +1,51 @@
+<style>
+    .sm-indent{
+        margin-left: .25in;
+    }
+    .brand-logo {
+        height: 2in;
+        width: 2in;
+    }
+
+    .list-group-item {
+        background-color: #9f9363;
+        padding-left: 10px;
+    }
+
+    div.col-3.logoplace {
+        padding: 0in;
+        
+    }
+
+    .col.brandname{
+        padding-top: auto;
+        padding-bottom: auto;
+    }
+    .container {
+        margin: 0in;
+    }
+
+</style>
+
+<h1 class="sm-indent"> All Brands</h1>
 <div class="list-group">
-  <% @brands.each do |brand| %>
-    <a class="list-group-item list-group-item-action" href="/brands/<%= brand.id %>" >
-      <div class="container text-center">
-        <div class="row align-items-start">
-          <div class="col">
-            <img src="<%=brand.logo%>" class="brand-logo">
-          </div>
-          <div class="brand-name">
-            <%= brand.name %>
+    <% @brands.each do |brand| %>
+      <a class="list-group-item list-group-item-action" href="/brands/<%= brand.id %>" >
+        <div class="container">
+          <div class="row align-items-start">
+            <div class="col-3 logoplace">
+              <img src="<%= brand.logo %>" class="brand-logo">
+            </div>
+            <div class="col brand-name">
+              <h1><%= brand.name %></h1>
+              <p> <%= brand.desc %></p>
+            </div>
           </div>
         </div>
-      </div>
-    </a>
-  <% end %>
-</div>
+      </a>
+    <% end %>
+  </div>
+  
 
   <script>
     rm=document.querySelector('.active');
