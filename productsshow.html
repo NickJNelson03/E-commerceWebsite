@@ -66,24 +66,32 @@
   </nav>
 
 
-<h1><%= @product.title %></h1>
+  <div class="container">
+    <h1>Scientific Calculator</h1>
 
-<p><%= @product.description %></p>
+<p>From Texas Instruments it's a brand new scientific calculator. Available now!</p>
 
-<h2>Product Reviews</h2>
-<%= render @product.reviews %>
+<h2>Reviews for Scientific Calculator</h2>
 
+<p>Tell us about the product</p>
 <h2>Add a Review:</h2>
-<%= form_with model: [ @product, @product.reviews.build ] do |form| %>
+<form>
   <p>
-    <%= form.label :rating %><br>
-    <%= form.select :rating, (1..5).to_a %>
+    <label for="rating">Rating:</label><br>
+    <select id="rating">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
   </p>
   <p>
-    <%= form.label :comment %><br>
-    <%= form.text_area :comment %>
+    <label for="content">What do you have to say?</label><br>
+    <textarea id="content"></textarea>
   </p>
   <p>
-    <%= form.submit %>
+    <button type="submit">Submit</button>
   </p>
-<% end %>
+</form>
+  </div>
