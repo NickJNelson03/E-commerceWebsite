@@ -1,0 +1,160 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.1deb5ubuntu1
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: Apr 23, 2024 at 06:09 PM
+-- Server version: 10.6.16-MariaDB-0ubuntu0.22.04.1
+-- PHP Version: 8.1.2-1ubuntu2.14
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `firstEcomAttempt`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ar_internal_metadata`
+--
+
+CREATE TABLE `ar_internal_metadata` (
+  `key` varchar(255) NOT NULL,
+  `value` varchar(255) DEFAULT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `updated_at` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ar_internal_metadata`
+--
+
+INSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES
+('environment', 'development', '2024-04-19 04:12:41.925514', '2024-04-19 04:12:41.925519');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brands`
+--
+
+CREATE TABLE `brands` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `desc` text DEFAULT NULL,
+  `logo` text DEFAULT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `updated_at` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `brands`
+--
+
+INSERT INTO `brands` (`id`, `name`, `desc`, `logo`, `created_at`, `updated_at`) VALUES
+(1, 'Apple', 'A fortune 500 company, Apple has stood out from the pack for decades in personal computers. In recent years, they have built an empire on personal tech like phones, watches, and even VR.', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAzFBMVEUAAAD///9DQ0P7/PvKzMnZ3d6tsKzz9PKLjYrX2db4+fh7fnrm5+Wkp6PHycYVGRTR09Cvs7UOEA1KTUqQk4+4ureqrKoeIR03OjYcHhwYGRducGycn5t1eHQ8PjuRkpAoKyZXWlcHDgNiZWAuMC1RUlASFhBYVk/i4d63trFkYl0sKiQXFQseHBZ1cmzt6+c5MiwXDQB/eXhoYGEfGBgVDQ6hm5tWUlJEPz+PiYmDf36ppqkiHyM5Njl4dHjHxMcdIyUTGBo0PD9DS00mZxnlAAAEiUlEQVR4nO3c21raQBQF4IwBE0KEpArSAirVWmw9tNV6rDXa93+nCjF8CTOgldnsbbr+67nYi2SOJHEcAAAAAAAAAAAAAAAAAAAAAAAAAPifvFvfaLW5i6CzWa8ESqngHXchRDqrnkq95y6FRLOlJja5i6HgK1XqhJ1aPqD7gbse67pBPqA64a7Hug1VVOMuyLbeVEDV4q7IMi2g6nOXZFddC6i2uGuyal0PWLJuGOoJt7lrsmpND+jucBdlU0cPWLKRtGJI2OEuyqZB6S9hw5CwyV2UTVuGgD53UVbpqxkVcddk11AL6O1x12TVjn4JB9w12dXXAna5S7JsdTpgyfYU2lwRlO0KOk7hbEYNy7VnGitsK9a4q6GQSxi9/cVos6mf1EdP8dzG9CSxv9n8uJy6bNjs9irD8OQkDGstvxBlPNJ4kZ+/flv9cWvPC4e1tf5buLJ+rXgU6lX8ydXZ7fndlfxfFIN26BZau8MN2cffnZYyierGxm3P2LqyvuyyX2zPnG+ssVv8e2nHr81uHAnN2HNn15zerp/SO3D/kx/Nb6tWBW4aV/R9gyHl43BSC80351TLXe5A0wzHvAvqcUcq0tbUFlS4Q+WZjl8WV5MzcZiOCG0I97mTPaG5giND7mipA7KAQs6ppv/PtWuVO575FNuexgp3PuOfZdaIOOag7IQiZovPhAFl/GPzksXoKx1wZxs7pgvY4M6WmrPHW5CQuZ6uFwZfubOl6AbSY+5oqcOXbGVfRUgndL5QBVRC7lG6m1TGROEQLtgOuZM9OaIKKKUX0k33X7iTZdpEAb0j7mQZqsMLOWdsJ0QJ5TyLSRRQTjekSuhecgfLfCVKKGeguSRKKOftkhWihCF3sAkkfK3y36WelHU3WcJAzMNgpiearRAz43+jSnjNnSzznSqhmO0h2bpUznRBdtIm5nmh6PlaX0fMFxbIjto87mSZc6qE6gd3tCenZAmljDVnZAnFTIlkg6nyfnJnS1E9CqXEnOvTDTVSBpsLwoQyzqPO6DriY1c84443QraqGQklRLyiTKg8ATcq1TY/85s7IOkDQ2MH7PMi5Xwx5nGvbqjOvXNC5pmR+jYdcS84E9KOpinm7eISEp7zJpzzMpctvAGXMNbcMCekXbmN/OJOSHeWkYq5AzpOlTSge8udz3F+kyYUcAlpL2LA3gtHKHsi81yYobuIUk6/6ebEU+5omZgo4B13sAmiIykZw0zqmiThFXesPIq1m4j3RyduCRIKWM3k2f/igLivZNm+T+U8kZFJguer/gfePXcg3a7VhCK/xXdjMaCcp9kL7P1jKuMVYANbL0JVuYPMlNhZvYUCR5nMg40B1Uu4Y8zzsPhVDBPuEPPtze6LbhjF2/617/fi6uwfoppwR3iWeUR17+r5j3jcD3rmkwE5W8I5tg133naitxvc6Q3fyIehk6n39qqzPlGSTB0O3CXLLHMhD/Gko3nxn3kt/WowafiwrPLsGNTX4rjXnxtvbK/rt+P2tciFKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQBn9BcakTE8Z0+SZAAAAAElFTkSuQmCC', '2024-04-19 06:05:31.084776', '2024-04-19 06:05:31.084776'),
+(2, 'Texas Instruments', 'The forerunner in reliable business tools, Texas Instruments specializes in precision manufacturing and quality consumer tools', 'https://recf.org/wp-content/uploads/2021/11/texas-instruments-internship-Logo.png', '2024-04-19 06:09:34.284784', '2024-04-19 06:09:34.284784'),
+(3, 'Logitech', 'The best gaming mouses in the biz. Logitech International S.A. is a Swiss company and a multinational manufacturer of computer peripherals and software. Headquartered in Lausanne, Switzerland, the company has offices throughout Europe, Asia, Oceania, and the Americas, and is one of the world\'s leading manufacturers of input and interface devices for personal computers (PCs) and other digital products.', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAbFBMVEX///8AAACMjIxeXl7s7OxISEhVVVWRkZGqqqq+vr78/PwwMDC0tLT09PTU1NR0dHQ7OztmZmaAgIDFxcWbm5s1NTXg4ODo6OjIyMigoKCPj4/a2tpJSUlQUFAfHx96enoVFRVvb28bGxsMDAyzD212AAADmklEQVR4nO2c2XLiMBAAbTCXAwkEcpJASP7/H5eFyh6sRyM7zkoz1f0u13RJ1jlSUQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAd6rtejZ9mqUO41uo1pPVrjwzTh1M79Sz/Vv5B8PUAfVLPR+XF7gyvD5c6vkynF01+DkynH80+rkxXO8EPyeG1avo58NwE/DzYFjdBQXtG87DfvYNbzRB44b1UhW0bVjpfrYN72MELRtuowQNG8bVoGHDh0hBs4aLWEGzhs0rJUeGq2hBo4bTeEGbO1Gx3ehueLuxuZv4HmE32lynDrM7t6re1XSROsivoM5lxoZr74QyUCy3qQP8Kko/Ok8d39cJ+o1M/39ngttOg9TR9UDtvIWGq/AxdXC94F4wsHfoookWhby35qGTKUJT7lHq0HpiIho6GAdPSGeEXn5CuZEuU0fWF+JgaH6y/clIEDS5UdGEOGOzvh78xaMgeJU6sN6QfsNp6sB6Q9ok9TIWiqPhi1JM6p9Ebv+LTQNSR/OklPsn000j2RRXGu+1ntSOodSVauXsGAprQ3WssGMoDBYrrZwdw0HHeOwY7pvj0bpSQ4ZC+pM6o7FjeGiOR138YpiPof9WKhyMbrRydgyfm+NR58l2DJ+a41G3MOwYCrO2D62cHcNrISBtAWzHUMrV086c7BhKJ2taQIYMhSSMnVLMkKGUl38fLmbIUMozeQ4XC10ZysxQTIYKF7sZCbwIu3AJD1slw65na0KicULDoWD43vF7wn2NhIZiwlfHSszPUE5f7/a9/AzlVIx9p89laCjnJXY6QszQMJDVVnf4XIaGgVsIXRJqcjSUVlBHDu2/lqNhKAW6/bFfloYz2bC9YpaGhfy0QMQhzQV5GoYqsbxrd6Sfp2ERvn7f6g5QpoaB7vQnwxbVmKlhcQgrls/Rg3+uhsF0/XOIVdyXcjXUH4ooy/E8prFmayiuhP9iOVk/KN/J11Bvp789XwLzgHwNYx8bOBG4B5yxYZuLwEYNpcQMR4bxO9lmDQPXZ7wYxj6rYNhQmYNHGC4GkwYGGd3gj8r+tflqxCcxz2PYNgxc9fJiWKzdG6pP7tk3VFuqA8PiPjgyejAMT8R9GBa1kATux/A4P5FerXFjeHRs7nIcGR6ZNaypfBkeK3J6mSDkzfBIvR7c+TY8sZ0PVmfP19ShfC+L6iFy/xsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAJPwDvLiPdkRlfIgAAAABJRU5ErkJggg==', '2024-04-22 21:30:26.505571', '2024-04-22 21:30:26.505571');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` bigint(20) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `desc` text DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `stock` int(11) DEFAULT NULL,
+  `brand_id` bigint(20) NOT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `updated_at` datetime(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `title`, `desc`, `price`, `stock`, `brand_id`, `created_at`, `updated_at`) VALUES
+(1, 'Macbook Air', 'The perfect laptop for your everyday needs. Great for students, employees, or important people', 1000, 5, 1, '2024-04-19 04:14:13.122888', '2024-04-19 04:14:13.122888'),
+(2, 'USB Drive 10GB', 'Your standard USB Drive. All the storage you need in a compact container', 8.99, 100, 2, '2024-04-19 05:27:59.817271', '2024-04-19 05:27:59.817271'),
+(3, 'Scientific Calculator', 'From Texas Instruments it\'s a brand new scientific calculator. Available now!', 50.56, 85, 2, '2024-04-19 05:52:59.835672', '2024-04-19 05:52:59.835672'),
+(4, 'Computer Mouse', 'A smooth laser powered mouse. Silent, light, and affordable.', 20.05, 99, 3, '2024-04-19 05:54:15.534180', '2024-04-19 05:54:15.534180');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `schema_migrations`
+--
+
+CREATE TABLE `schema_migrations` (
+  `version` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `schema_migrations`
+--
+
+INSERT INTO `schema_migrations` (`version`) VALUES
+('20240418022709'),
+('20240419055902');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `ar_internal_metadata`
+--
+ALTER TABLE `ar_internal_metadata`
+  ADD PRIMARY KEY (`key`);
+
+--
+-- Indexes for table `brands`
+--
+ALTER TABLE `brands`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `schema_migrations`
+--
+ALTER TABLE `schema_migrations`
+  ADD PRIMARY KEY (`version`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `brands`
+--
+ALTER TABLE `brands`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
