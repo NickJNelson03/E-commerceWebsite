@@ -24,7 +24,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_23_181946) do
     t.text "desc"
     t.float "price"
     t.integer "stock"
-    t.bigint "brand_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
