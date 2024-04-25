@@ -1,15 +1,35 @@
-<h1> <%= @product.title %> </h1>
+<h1><%=@product.title%></h1>
 
-<ul>
-Current Data
+  <p><%=@product.desc%></p>
 
-<li> <%= @product.desc %> </li>
-<li> <%= @product.price %> </li>
-<li> <%= @product.stock %> </li>
-<li> 
-  <a href="/brands/<%= @brand.id %>"> 
-    <%= @brand.name %>
-  </a> 
-</li>
+  <h2>Reviews for <%=@product.title%></h2>
+  
+  <% @product.reviews.each do |review| %>
+   <ul>
+    <li> <%= review.reviewer %> </li>
+    <li> <%= review.stars %> </li>
+    <li> <%= review.content %> </li>
+   </ul>
+  <% end %>
+  <p>Tell us about the product</p>
+  <h2>Add a Review:</h2>
+  <form>
+    <p>
+      <label for="rating">Rating:</label><br>
+      <select id="rating">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </p>
+    <p>
+      <label for="content">What do you have to say?</label><br>
+      <textarea id="content"></textarea>
+    </p>
+    <p>
+      <button type="submit">Submit</button>
+    </p>
+  </form>
 
-</ul>
