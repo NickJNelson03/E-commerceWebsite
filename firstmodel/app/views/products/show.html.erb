@@ -1,89 +1,34 @@
-<head>
-    <meta charset="UTF-8">
-    <title>Sample Nav</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">  
-  </head>
-  <style>
-    body {
-      font-family: "Helvetica Neue", Helvetica, sans-serif;
-        background: linear-gradient(to right, #f0dc8d,#3a3945);
-    }
-    .navbar {
-        font-weight: 500;
-        background: linear-gradient(to right, #ad9f66,black);
-      }
-    .nav-text {
-        color: #fac823;
-    }
-    .nav-link.active.nav-text {
-      color: #5f5122;
-    }
-    .navbar-toggler {
-      background-color: #69603f;
-    }
+<h1><%=@product.title%></h1>
 
-    .navbar-brand {
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
-      padding-top: 2px;
-    }
+  <p><%=@product.desc%></p>
 
-    .d-flex {
-      margin-bottom: 0px;
-    }
-
-    .btn {
-      color: #f4ca34;
-      outline-color: #f6f6f6;
-    }
+  <h2>Reviews for <%=@product.title%></h2>
   
-  </style>
-
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Ken-Comm</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active nav-text" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-text" href="#">Brands</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-text" href="#">Products</a>
-          </li>
-        </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-warning" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav>
-
-
-<h1><%= @product.title %></h1>
-
-<p><%= @product.description %></p>
-
-<h2>Product Reviews</h2>
-<%= render @product.reviews %>
-
-<h2>Add a Review:</h2>
-<%= form_with model: [ @product, @product.reviews.build ] do |form| %>
-  <p>
-    <%= form.label :rating %><br>
-    <%= form.select :rating, (1..5).to_a %>
-  </p>
-  <p>
-    <%= form.label :comment %><br>
-    <%= form.text_area :comment %>
-  </p>
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
+  <% @product.reviews.each do |review| %>
+   <ul>
+    <li> <%= review.reviewer %> </li>
+    <li> <%= review.stars %> </li>
+    <li> <%= review.content %> </li>
+   </ul>
+  <% end %>
+  <p>Tell us about the product</p>
+  <h2>Add a Review:</h2>
+  <form>
+    <p>
+      <label for="rating">Rating:</label><br>
+      <select id="rating">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </p>
+    <p>
+      <label for="content">What do you have to say?</label><br>
+      <textarea id="content"></textarea>
+    </p>
+    <p>
+      <button type="submit">Submit</button>
+    </p>
+  </form>
