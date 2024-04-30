@@ -1,97 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sample Nav</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">  
-  </head>
-  <style>
-    body {
-      font-family: "Helvetica Neue", Helvetica, sans-serif;
-        background: linear-gradient(to right, #f0dc8d,#3a3945);
-    }
-    .navbar {
-        font-weight: 500;
-        background: linear-gradient(to right, #ad9f66,black);
-      }
-    .nav-text {
-        color: #fac823;
-    }
-    .nav-link.active.nav-text {
-      color: #5f5122;
-    }
-    .navbar-toggler {
-      background-color: #69603f;
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, sans-serif;
+            background: linear-gradient(to bottom, #f0dc8d, #3a3945);
+            color: #fff; /* Text color */
+            padding-top: 50px; /* Add padding to the top */
+            padding-bottom: 50px; /* Add padding to the bottom */
+            margin: 0;
+        }
+        .navbar {
+            font-weight: 500;
+            background: linear-gradient(to right, #ad9f66, black);
+        }
+        .navbar-toggler {
+            background-color: #69603f;
+        }
+        .navbar-brand {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            padding-top: 2px;
+        }
+        .d-flex {
+            margin-bottom: 0px;
+        }
+        .btn {
+            color: #f4ca34;
+            outline-color: #f6f6f6;
+        }
+        .review-star {
+            color: #a3a29d;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .review-star:hover,
+        .review-star.active {
+         color: #fac823;
+        }
+        .text-background {
+            background-color: #69603f;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .price {
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-right: 20px; /* Add margin between image and price */
+        }
+        .stock {
+            font-size: 1.2rem;
+            color: #f4ca34;
+        }
+        .flex-container {
+            display: flex;
+            align-items: center; /* Center items vertically */
+        }
+         .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
     }
 
-    .navbar-brand {
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
-      padding-top: 2px;
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
     }
 
-    .d-flex {
-      margin-bottom: 0px;
+    .product {
+        border: 1px solid #ddd;
+        margin-bottom: 20px;
+        padding: 10px;
+        transition: all 0.3s ease;
+        cursor: pointer;
     }
 
-    .btn {
-      color: #f4ca34;
-      outline-color: #f6f6f6;
+    .product:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-  
-  </style>
 
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Ken-Comm</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active nav-text" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-text" href="#">Brands</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-text" href="#">Products</a>
-          </li>
-        </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-warning" type="submit">Search</button>
-        </form>
-      </div>
+    .product img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .product-details {
+        display: none;
+    }
+
+    .product.active .product-details {
+        display: block;
+    }
+    .logo {
+    text-align: center;
+    background:linear-gradient(to right,black,white);
+    padding: 10px;
+}
+
+</style>
+    </style>
+</head>
+<body>
+    <div class="logo">
+      <img src="/Users/kenyonuser/Desktop/Screenshot 2024-04-28 at 7.18.29 PM.png" alt="logo">
     </div>
-  </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Ken-Comm</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Brands</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Products</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-warning" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
 
+    <div class="container">
+        <h1>Scientific Calculator</h1>
+        <p>From Texas Instruments it's a brand new scientific calculator. Available now!</p>
 
-  <div class="container">
-    <h1>Scientific Calculator</h1>
+        <div class="flex-container">
+            <img src="https://m.media-amazon.com/images/I/7106ob3ATYL._AC_UF894,1000_QL80_.jpg" alt="Product Image" class="product-image" height="250" width="250">
+            <div>
+                <p class="price">$250.00</p>
+                <p class="stock">In stock</p>
+                 <button class="btn btn-primary">Add to Cart</button>
+            </div>
+        </div>
 
-<p>From Texas Instruments it's a brand new scientific calculator. Available now!</p>
+        <h2>Reviews for Scientific Calculator</h2>
+        <p>Tell us about the product</p>
+        
+        <div class="container">
+    <h1>More Products</h1>
 
-<h2>Reviews for Scientific Calculator</h2>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="product" onclick="toggleDetails(this)">
+                <img src="https://m.media-amazon.com/images/I/71Er0a9stOL._AC_UF894,1000_QL80_.jpg" alt="Product Image" height="200" width="200">
+                <h3>Product Name</h3>
+                <p>$120.99</p>
+                <div class="product-details">
+                    <p>Another World class Calculator</p>
+                    <button class="btn btn-primary">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="product" onclick="toggleDetails(this)">
+                <img src="https://m.media-amazon.com/images/I/61jAcXAbZrL._AC_UF894,1000_QL80_.jpg" alt="Product Image" height="200" width="200">
+                <h3>Product Name</h3>
+                <p>$99.99</p>
+                <div class="product-details">
+                    <p>Calculator 2</p>
+                    <button class="btn btn-primary">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="product" onclick="toggleDetails(this)">
+                <img src="https://www.schoolmart.com/wp-content/uploads/2016/04/TI-30XS_MV_hi-1.jpg" alt="Product Image" height="200" width="200">
+                <h3>Product Name</h3>
+                <p>$59.99</p>
+                <div class="product-details">
+                    <p>Calculator 3</p>
+                    <button class="btn btn-primary">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="product" onclick="toggleDetails(this)">
+                <img src="https://www.schooldepot.co.nz/cdn/shop/products/Jastek-Scientific-Calculator-JasCS1.jpg?v=1656824191" alt="Product Image" height="200" width="200">
+                <h3>Product Name</h3>
+                <p>$48.99</p>
+                <div class="product-details">
+                    <p>Calculator 4</p>
+                    <button class="btn btn-primary">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        <h2>Add a Review:</h2>
+        <form>
+            <p>
+                <label for="rating">Rating:</label><br>
+                <!-- Use stars for ratings -->
+                <span class="review-star">&#9733;</span>
+                <span class="review-star">&#9733;</span>
+                <span class="review-star">&#9733;</span>
+                <span class="review-star">&#9733;</span>
+                <span class="review-star">&#9733;</span>
+            </p>
+            <p>
+                <label for="content">What do you have to say?</label><br>
+                <textarea id="content" class="form-control"></textarea>
+            </p>
+            <p>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </p>
+        </form>
+    </div>
 
-<p>Tell us about the product</p>
-<h2>Add a Review:</h2>
-<form>
-  <p>
-    <label for="rating">Rating:</label><br>
-    <select id="rating">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-    </select>
-  </p>
-  <p>
-    <label for="content">What do you have to say?</label><br>
-    <textarea id="content"></textarea>
-  </p>
-  <p>
-    <button type="submit">Submit</button>
-  </p>
-</form>
-  </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+   <script>
+   const stars = document.querySelectorAll('.review-star');
+
+stars.forEach(star => {
+    star.addEventListener('click', () => {
+        toggleStars(star);
+    });
+});
+
+function toggleStars(clickedStar) {
+    const clickedIndex = Array.from(stars).indexOf(clickedStar);
+
+    stars.forEach((star, index) => {
+        if (index <= clickedIndex) {
+            star.classList.add('active');
+        } else {
+            star.classList.remove('active');
+        }
+    });
+}
+
+function toggleDetails(element) {
+    element.classList.toggle('active');
+}</script> 
+</body>
+</html>
