@@ -46,10 +46,8 @@
 
 </style>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"> </script>
 
-
-<div class="backdrop rounded-4 danger">
+<div class="backdrop rounded-3 danger">
   <div class="container-fluid text-center">
 	<h2 class="lead title"> Log In</h2>
 	<%= bootstrap_form_for(resource, as: resource_name, url: session_path(resource_name), layout: :floating) do |f| %>
@@ -75,9 +73,9 @@
           <p class="lead">
             <a class="link-warning link-underline-opacity-0 link-underline-opacity-50-hover" href="/users/password/new">Reset Password</a>
           </p>
+	<% end %>
   </div>
 </div>
-
 <script>
   //deselect any page
   var i=0
@@ -89,34 +87,44 @@
 
   //select account button
   var acctbtn=document.querySelector(".account-button");
+  console.log(acctbtn);
   acctbtn.classList.add("active");
 
-  function rearrange(active) {
+  //change link color
+  document.getElementById("")
+
+    function rearrange(active) {
     children=active.children
-    first=children[0]
-    active.removeChild(first)
-    active.appendChild(first)
+      first=children[0]
+      console.log(active,children,first)
+      active.removeChild(first)
+      active.appendChild(first)
   }
-  
-  rearrange(document.getElementById("user_email").parentElement)
-  
+
+  function checkOrientation(parent) {
+    return (parent.children[0].nodeName == 'INPUT')
+  }
+
   forminputs=document.querySelectorAll(".form-floating")
   for (var input of forminputs) {
-    input.addEventListener('click',function(e) {
+    input.addEventListener('focusout',function(e) {
       if (e.target.value === "") {
         active=e.target.parentElement
-        rearrange(active)
-      }
-    },
-    input.addEventListener('focusout',function(e){
-      if (e.target.value === "") {
-        active=e.target.parentElement
-        rearrange(active)
+        if (checkOrientation(active) === true) {
+          rearrange(active)
+        }
       }
     })
-  )
+
+    input.addEventListener('focusin',function(e){
+      if (e.target.value === "") {
+        active=e.target.parentElement
+        console.log(checkOrientation(active), "work")
+        if (checkOrientation(active) === false) {
+          rearrange(active)
+        }
+      }
+    })
+  rearrange(input)
   }
 </script>
-	<% end %>
-  </div>
-</div>

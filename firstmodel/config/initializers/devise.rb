@@ -1,5 +1,24 @@
 # frozen_string_literal: true
 
+
+# /config/initializers/devise.rb
+
+# Turbo doesn't work with devise by default.
+# Keep tabs on https://github.com/heartcombo/devise/issues/5446 for a possible fix
+# Fix from https://gorails.com/episodes/devise-hotwire-turbo
+class TurboFailureApp < Devise::FailureApp
+  def respond
+    if request_format == :turbo_stream
+      redirect
+    else
+      super
+    end
+  end
+
+  def skip_format?
+    %w(html turbo_stream */*).include? request_format.to_s
+  end
+end
 # Assuming you have not yet modified this file, each configuration option below
 # is set to its default value. Note that some are commented out while others
 # are not: uncommented lines are intended to protect your configuration from
@@ -14,8 +33,27 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '57b8519f12f1d17a31b91043110905dd258859b768a129c386ca6cd99386f9ab8c14d7efc741d0fa3dca396b15e3596ea309763cb4668db074adbb540a015fb9'
+  # config.secret_key = '352156b7753889d5066ff37edc1464be3ab9f2f7f3610b218ee1589e5ccc4f8ee925687103b3016becf38a6433f7a948c9ccf07ac7d0b6abb1c75ada086201e7'
 
+    # ==> Controller configuration
+  # Configure the parent class to the devise controllers.
+  config.parent_controller = 'TurboDeviseController'
+  
+  # ...
+
+  # ==> Navigation configuration
+  # ...
+  config.navigational_formats = ['*/*', :html, :turbo_stream]
+
+  # ...
+
+  # ==> Warden configuration
+  # ...
+  config.warden do |manager|
+    manager.failure_app = TurboFailureApp
+  #   manager.intercept_401 = false
+  #   manager.default_strategies(scope: :user).unshift :some_external_strategy
+  end
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
@@ -126,7 +164,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'ca3de982c72021345619562f9bba2a0c7245197cce14c5745e8904795a868c8fc53f3440b55f110bbe42489fc8fd377e514ee8b34ee15fea4d0678ea4b89f5b8'
+  # config.pepper = 'fb9de640a9618f17bcb0e27ec4af0c5cdc17ca8555535585fde2cba6ea613b666d72fe3f2532624fdcb772ac2c4a90cd7aea00a13b2bdf62a1a2ff0c1734807f'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
