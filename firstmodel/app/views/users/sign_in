@@ -1,0 +1,78 @@
+<style>
+  html {
+    position:relative;
+  }
+
+  .lead.title {
+    font-size: 50;
+    letter-spacing: -1pt;
+    color: #5e5022;
+  }
+
+  .backdrop {
+    background-color: #b79b2d;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2in;
+    margin-bottom: 6in;
+    padding-bottom: .5in;
+    padding-top: .25in;
+    width: fit-content;
+  }
+
+  .form-floating {
+    width: 100%;
+    max-width: 6in;
+  }
+
+  .row {
+    margin-bottom: 7%;
+  }
+  .row label {
+    margin-left: 3%;
+  }
+
+
+</style>
+
+<div class="backdrop rounded-4 danger">
+  <div class="container-fluid text-center">
+    <p class="lead title"> Log In</p>
+
+
+
+    <div class="row justify-content-center">
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">Email address</label>
+      </div>
+
+      <div class="w-100 d-sm-block"></div>
+
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <label for="floatingPassword">Password</label>
+      </div>
+    </div>
+
+    <p class="lead">
+      Need an account? 
+      <a class="link-warning link-underline-opacity-0 link-underline-opacity-50-hover" href="/signup">Sign Up</a>
+    </p>
+  </div>
+</div>
+
+<script>
+  //deselect any page 
+  var i=0
+  if(i==0) {
+    var rm=document.querySelector('.active');
+    rm.classList.remove("active");
+  i++
+  }
+
+  //select account button
+  var acctbtn=document.querySelector(".account-button");
+  console.log(acctbtn);
+  acctbtn.classList.add("active");
+</script>
