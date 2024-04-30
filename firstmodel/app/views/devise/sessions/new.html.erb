@@ -21,9 +21,17 @@
     width: 6in;
   }
 
+  .form-check {
+    text-align: left;
+    margin-left:10%;
+    padding-bottom: 10px;
+  }
+
   .form-floating {
-    width: 100%;
+    width: 80%;
     max-width: 6in;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .row {
@@ -36,11 +44,10 @@
   .submit {
     margin-bottom: 3%;
   }
-
-  .submit input {
-    scale: 125%;
+  .enter {
+    scale: 120%;
     background-color: #5e5022;
-    color: #b79b2d;
+    color: #fac823;
   }
 
 
@@ -63,7 +70,7 @@
 	  <% end %>
 
 	  <div class="actions">
-	    <%= f.submit "Log in" %>
+	    <%= f.submit "Log in", class: "btn btn-outline-warning enter" %>
 	  </div>
 	  <p class="lead">
             Need an account?
