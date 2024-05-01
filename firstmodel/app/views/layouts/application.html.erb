@@ -1,20 +1,19 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Firstmodel</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
-  </head>
-
+<head>
+    <meta charset="UTF-8">
+    <title>Sample Nav</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">  
+</head>
   <style>
+    html {
+      background: linear-gradient(to right, #f0dc8d,#3a3945);
+      height: 100%;
+    }
+
     body {
-      font-family: "Helvetica Neue", Helvetica, sans-serif;
-        background: linear-gradient(to right, #f0dc8d,#3a3945);
+      font-family: "Helvetica Neue", Helvetica;
+      background: linear-gradient(to right, #f0dc8d,#3a3945);
+      
     }
     .navbar {
         font-weight: 500;
@@ -48,41 +47,77 @@
       margin-top: 10px;
       color: #5f5122;
     }
+
+    .dropdown-menu {
+      width:100%;
+      align-self: self-start;
+      background-color: #1f1e24;
+      outline-color: #f4ca34;
+      outline-width: 2px;
+    }
+
+    .dropdown-item {
+      color: #f4ca34;
+    }
     
+    .hidden {
+      display: none;
+    }
+
   </style>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Ken-Comm</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button> 
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active nav-text" id="homeLink" aria-current="page" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-text" id="brandsLink" href="/brands">Brands</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-text" id="productsLink" href="/products">Products</a>
-          </li>
-        </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-warning me-3" type="submit">Search</button>
-        </form>
-        <button type="button" class="btn btn-outline-warning me-1 account-button">
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Ken-Comm</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> 
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active nav-text" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-text" href="/brands" id="brandsLink">Brands</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-text" href="/products" id="productsLink">Products</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-warning me-3" type="submit">Search</button>
+      </form>
+      <div class="dropdown nav-item">
+        <button type="button" class="dropdown-toggle btn btn-outline-warning me-1 account-button" data-bs-toggle="dropdown" aria-expanded="false">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
             <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
           </svg>
         </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <% if user_signed_in? %>
+            <li><a class="dropdown-item acct-ctr" href="/users/info"> Account </a></li>
+            <li><%= link_to "Log Out",destroy_user_session_path, method: :delete, class: "dropdown-item acct-ctr" %></li>
+            <% else %>
+            <li><a class="dropdown-item acct-ctr" href="/users/sign_in"> Log In </a></li>
+            <li><a class="dropdown-item acct-ctr" href="/users/sign_up"> Sign Up </a></li>
+            <% end %>
+          </ul>
       </div>
+
     </div>
-  </nav>
+  </div>
+</nav>
+
   <body>
     <div class="container">
+      <% if notice %>
+        <p class="alert alert-success"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
       <%= yield %>
     </div>
   </body>

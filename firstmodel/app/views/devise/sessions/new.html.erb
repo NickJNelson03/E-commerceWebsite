@@ -1,0 +1,139 @@
+<style>
+  html {
+    position:relative;
+  }
+
+  .lead.title {
+    font-size: xx-large;
+    letter-spacing: -1pt;
+    color: #5e5022;
+    margin-bottom: 20px;
+  }
+
+  .backdrop {
+    background-color: #b79b2d;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2in;
+    margin-bottom: 6in;
+    padding-bottom: .25in;
+    padding-top: .25in;
+    width: 6in;
+  }
+
+  .form-check {
+    text-align: left;
+    margin-left:10%;
+    padding-bottom: 10px;
+  }
+
+  .form-floating {
+    width: 80%;
+    max-width: 6in;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .row {
+    margin-bottom: 5%;
+  }
+  .row label {
+    margin-left: 3%;
+  }
+
+  .submit {
+    margin-bottom: 3%;
+  }
+  .enter {
+    scale: 120%;
+    background-color: #5e5022;
+    color: #fac823;
+  }
+
+
+</style>
+
+
+<div class="backdrop rounded-3 danger">
+  <div class="container-fluid text-center">
+	<h2 class="lead title"> Log In</h2>
+	<%= bootstrap_form_for(resource, as: resource_name, url: session_path(resource_name), layout: :floating) do |f| %>
+	  <div class="field">
+	    <%= f.email_field :email, autofocus: true, autocomplete: "email", control_class: "form-control", wrapper: {class: 'form-floating mb-3'}%>
+	  </div>
+	  <%= f.password_field :password, autocomplete: "current-password", control_class: "form-control", wrapper: {class: 'form-floating mb-3'} %>
+
+	  <% if devise_mapping.rememberable? %>
+	    <div class="field">
+	      <%= f.check_box :remember_me %>
+	    </div>
+	  <% end %>
+
+	  <div class="actions">
+	    <%= f.submit "Log in", class: "btn btn-outline-warning enter" %>
+	  </div>
+	  <p class="lead">
+            Need an account?
+            <a class="link-warning link-underline-opacity-0 link-underline-opacity-50-hover" href="/users/sign_up">Sign Up</a>
+          </p>
+
+          <p class="lead">
+            <a class="link-warning link-underline-opacity-0 link-underline-opacity-50-hover" href="/users/password/new">Reset Password</a>
+          </p>
+	<% end %>
+  </div>
+</div>
+<script>
+  //deselect any page
+  var i=0
+  if(i==0) {
+    var rm=document.querySelector('.active');
+    rm.classList.remove("active");
+  i++
+  }
+
+  //select account button
+  var acctbtn=document.querySelector(".account-button");
+  console.log(acctbtn);
+  acctbtn.classList.add("active");
+
+  //change link color
+  document.getElementById("")
+
+    function rearrange(active) {
+    children=active.children
+      first=children[0]
+      console.log(active,children,first)
+      active.removeChild(first)
+      active.appendChild(first)
+  }
+
+  function checkOrientation(parent) {
+    return (parent.children[0].nodeName == 'INPUT')
+  }
+
+  forminputs=document.querySelectorAll(".form-floating")
+  for (var input of forminputs) {
+    input.addEventListener('focusout',function(e) {
+      if (e.target.value === "") {
+        active=e.target.parentElement
+        if (checkOrientation(active) === true) {
+          rearrange(active)
+        }
+      }
+    })
+
+    input.addEventListener('focusin',function(e){
+      if (e.target.value === "") {
+        active=e.target.parentElement
+        console.log(checkOrientation(active), "work")
+        if (checkOrientation(active) === false) {
+          rearrange(active)
+        }
+      }
+    })
+  rearrange(input)
+  if ((checkOrientation(input)) && (input.children[0].value != "") || (input.children[1].value != 0))
+    rearrange(input)
+  }
+</script>
