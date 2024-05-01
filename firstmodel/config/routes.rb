@@ -12,7 +12,10 @@ Rails.application.routes.draw do
   get "/brands", to: "brands#index"
   # Defines the root path route ("/")
   # root "posts#index"
-
+  devise_scope :user do 
+    get "/users/sign_out", to: "devise/sessions#destroy"
+    get "/users/info", to: "users#show"
+  end
   resources :brands do
     resources :products
   end

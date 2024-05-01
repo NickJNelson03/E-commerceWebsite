@@ -133,5 +133,7 @@
       }
     })
   rearrange(input)
+  if ((checkOrientation(input)) && (input.children[0].value != "") || (input.children[1].value != 0))
+    rearrange(input)
   }
 </script>

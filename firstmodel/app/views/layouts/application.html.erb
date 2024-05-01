@@ -78,17 +78,17 @@
           <a class="nav-link active nav-text" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link nav-text" href="/brands">Brands</a>
+          <a class="nav-link nav-text" href="/brands" id="brandsLink">Brands</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link nav-text" href="/products">Products</a>
+          <a class="nav-link nav-text" href="/products" id="productsLink">Products</a>
         </li>
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-warning me-3" type="submit">Search</button>
       </form>
-      <div class="dropdown">
+      <div class="dropdown nav-item">
         <button type="button" class="dropdown-toggle btn btn-outline-warning me-1 account-button" data-bs-toggle="dropdown" aria-expanded="false">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
@@ -96,11 +96,14 @@
           </svg>
         </button>
           <ul class="dropdown-menu dropdown-menu-end">
+            <% if user_signed_in? %>
+            <li><a class="dropdown-item acct-ctr" href="/users/info"> Account </a></li>
+            <li><%= link_to "Log Out",destroy_user_session_path, method: :delete, class: "dropdown-item acct-ctr" %></li>
+            <% else %>
             <li><a class="dropdown-item acct-ctr" href="/users/sign_in"> Log In </a></li>
             <li><a class="dropdown-item acct-ctr" href="/users/sign_up"> Sign Up </a></li>
-            <li><a class="dropdown-item acct-ctr hidden" href="/users/account"> Account </a></li>
-            <li><a class="dropdown-item acct-ctr hidden" href="/users/exit"> Log Out </a></li>
-          </div>
+            <% end %>
+          </ul>
       </div>
 
     </div>

@@ -57,19 +57,20 @@
   <div class="container-fluid text-center">
     <p class="lead title"> Sign up for a </p>
     <%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), layout: :floating) do |f| %>
-    <div class="container-fluid text-align-left">
+    <div class="container-fluid text-align-left" id="radioTypeForm">
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-        <label class="form-check-label" for="exampleRadios1">
+        <input class="form-check-input" type="radio" name="Radios" id="buyerbutton" value="b" checked>
+        <label class="form-check-label" for="buyerbutton">
           Buyer Account
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-        <label class="form-check-label" for="exampleRadios2">
+        <input class="form-check-input" type="radio" name="Radios" id="sellerbutton" value="s">
+        <label class="form-check-label" for="sellerbutton">
           Seller Account
         </label>
       </div>
+      <input type="hidden" id="user_account_type" name="user[account_type]" value="">
     </div>
 
     <div class="field">
@@ -147,5 +148,20 @@
     })
   rearrange(input)
   }
-</script>
+
+  //read radio and update hidden input
+    function updateTypeForm(type) {
+    hideInput=document.getElementById("user_account_type")
+    hideInput.value=type
+  }
+  function getRadioValue(radioDivId) {
+    checked=document.querySelector(".form-check :checked")
+  }
+  document.getElementById("radioTypeForm").addEventListener('click', function(e){
+    val=document.querySelector(".form-check :checked").value
+    updateTypeForm(val)
+  })
+
+  val=document.querySelector(".form-check :checked").value
+  updateTypeForm(val)
 </script>
