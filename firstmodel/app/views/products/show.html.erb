@@ -68,27 +68,34 @@
     }
 
     .toast.show {
-    box-shadow: none;
+      box-shadow: none;
+      width: 6in;
+      margin: 5px;
     }
 
     .info {
     margin-left: .25in;
     }
-    .review-name {
-      margin-right: 10px;
-    }
-    .toast.show {
-      width: 6in;
+    .starsection {
+      margin-right: 1.5in;
+      font-size: 5pt;
     }
     .fixed-star {
-      font-size: 16pt;
+      font-size: 20pt;
     }
-  
+    .btn.enter {
+      background-color: #5e5022;
+      margin-top: .25in;
+    }
+    .btn.enter:hover {
+      background-color: #f4ca34;
+    }
     .backdrop {
       background-color: #dadada45;
       color: #5e5022;
       padding: .25in;
       margin-top: .25in;
+    }
     </style>
     <div class="container">
         <h1><%= @product.title %> </h1>
@@ -167,7 +174,9 @@
             <div class="toast-header">
               <!--<img src="..." class="rounded me-2" alt="...">-->
               <strong class="me-auto"> 
-                <span class="review-name"> <%= review.reviewer %> </span>
+                <%= review.reviewer %>
+              </strong>
+              <span class='starsection' >
               <% s=review.stars %>
 	      <% for i in 1..5 %>
                 <% if i <= s %>
@@ -176,8 +185,20 @@
                 <span class="fixed-star">&#9733;</span>
                 <% end %>
               <% end %>
-              </strong>
-              <small> <%= ((Time.current - review.created_at)/1.day).round %> days ago</small>
+              </span>
+              <!-- Now we format the time -->
+              <% days=((Time.current - review.created_at)/1.day).round %>
+              <% hours=((Time.current - review.created_at)/1.hour).round %>
+              <% minutes=((Time.current - review.created_at)/1.minute).round %>
+              <% if days != 0 %>
+                <small> <%= days %> days ago</small>
+              <% elsif hours != 0 %>
+                <small> <%= hours %> hours ago</small>
+              <% elsif minutes != 0 %>
+                <small> <%= minutes %> min ago</small>
+              <% else %>
+                <small> just now </small>
+              <% end %> 
             </div>
             <div class="toast-body">
               <%= review.content %>
@@ -194,6 +215,7 @@
         <%= form_with model: [ @product, @product.reviews.build ] do |form| %>
           <div class="field">
             <input class="hidden" name="review[reviewer]" value="<%= current_user.firstname %> <%= current_user.lastname %>" > 
+            <input class="hidden" name="review[stars]" value id="starInput" > 
           </div>  
              <p>
                 <label for="rating">Rating:</label><br>
@@ -218,10 +240,12 @@
 </body>
 <script>
    const stars = document.querySelectorAll('.review-star');
+   const starform=document.getElementById('starInput')
 
 stars.forEach(star => {
     star.addEventListener('click', () => {
         toggleStars(star);
+        starform.value=countStars();
     });
 });
 
@@ -240,4 +264,10 @@ function toggleStars(clickedStar) {
 function toggleDetails(element) {
     element.classList.toggle('active');
 }
+
+function countStars() {
+    return document.querySelectorAll(".review-star.active").length
+}
+
+
 </script> 
