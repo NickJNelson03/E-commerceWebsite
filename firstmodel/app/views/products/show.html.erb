@@ -1,34 +1,243 @@
-<h1><%=@product.title%></h1>
+    <style>
+        .review-star {
+            color: #a3a29d;
+            font-size: 37px;
+            cursor: pointer;
+        }
+        .review-star:hover,
+        .review-star.active,
+        .fixed-star.active {
+            color: #f4bb00;
+        }
+        .text-background {
+            background-color: #69603f;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .price {
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-right: 20px; /* Add margin between image and price */
+        }
+        .stock {
+            font-size: 1.2rem;
+            color: #f4ca34;
+        }
+        .flex-container {
+            display: flex;
+            align-items: center; /* Center items vertically */
+        }
+     .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        }
+        h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-  <p><%=@product.desc%></p>
+    .product {
+        border: 1px solid #ddd;
+        margin-bottom: 20px;
+        padding: 10px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
 
-  <h2>Reviews for <%=@product.title%></h2>
+    .product:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .product img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .product-details {
+        display: none;
+    }
+
+    .product.active .product-details {
+        display: block;
+    }
+
+    .toast.show {
+    box-shadow: none;
+    }
+
+    .info {
+    margin-left: .25in;
+    }
+    .review-name {
+      margin-right: 10px;
+    }
+    .toast.show {
+      width: 6in;
+    }
+    .fixed-star {
+      font-size: 16pt;
+    }
   
-  <% @product.reviews.each do |review| %>
-   <ul>
-    <li> <%= review.reviewer %> </li>
-    <li> <%= review.stars %> </li>
-    <li> <%= review.content %> </li>
-   </ul>
-  <% end %>
-  <p>Tell us about the product</p>
-  <h2>Add a Review:</h2>
-  <form>
-    <p>
-      <label for="rating">Rating:</label><br>
-      <select id="rating">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-    </p>
-    <p>
-      <label for="content">What do you have to say?</label><br>
-      <textarea id="content"></textarea>
-    </p>
-    <p>
-      <button type="submit">Submit</button>
-    </p>
-  </form>
+    .backdrop {
+      background-color: #dadada45;
+      color: #5e5022;
+      padding: .25in;
+      margin-top: .25in;
+    </style>
+    <div class="container">
+        <h1><%= @product.title %> </h1>
+        <p><%= @product.desc %> </p>
+
+        <div class="flex-container">
+            <img src="https://m.media-amazon.com/images/I/7106ob3ATYL._AC_UF894,1000_QL80_.jpg" alt="Product Image" class="product-image" height="250" width="250">
+            <div class="info">
+                <p class="price"> $<%= "%.2f" % @product.price %> </p>
+                <p class="stock"> <%= @product.stock %> remaining </p>
+                 <button class="btn btn-primary">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h1>More Products</h1>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="product" onclick="toggleDetails(this)">
+                    <img src="https://m.media-amazon.com/images/I/71Er0a9stOL._AC_UF894,1000_QL80_.jpg" alt="Product Image" height="200" width="200">
+                    <h3>Product Name</h3>
+                    <p>$120.99</p>
+                    <div class="product-details">
+                        <p>Another World class Calculator</p>
+                        <button class="btn btn-primary">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="product" onclick="toggleDetails(this)">
+                    <img src="https://m.media-amazon.com/images/I/61jAcXAbZrL._AC_UF894,1000_QL80_.jpg" alt="Product Image" height="200" width="200">
+                    <h3>Product Name</h3>
+                    <p>$99.99</p>
+                    <div class="product-details">
+                        <p>Calculator 2</p>
+                        <button class="btn btn-primary">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="product" onclick="toggleDetails(this)">
+                    <img src="https://www.schoolmart.com/wp-content/uploads/2016/04/TI-30XS_MV_hi-1.jpg" alt="Product Image" height="200" width="200">
+                    <h3>Product Name</h3>
+                    <p>$59.99</p>
+                    <div class="product-details">
+                        <p>Calculator 3</p>
+                        <button class="btn btn-primary">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="product" onclick="toggleDetails(this)">
+                    <img src="https://www.schooldepot.co.nz/cdn/shop/products/Jastek-Scientific-Calculator-JasCS1.jpg?v=1656824191" alt="Product Image" height="200" width="200">
+                    <h3>Product Name</h3>
+                    <p>$48.99</p>
+                    <div class="product-details">
+                        <p>Calculator 4</p>
+                        <button class="btn btn-primary">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--The following elements are stored in conditionals-->
+<!-- Before we do that, we establish some boolean variables-->
+<% reviewed = (@reviews.length > 0) %>
+<% logged_in = (user_signed_in? and current_user.account_type == "b") %>
+<div class="container">
+<% if reviewed %>
+        <h2>Reviews for Scientific Calculator</h2>
+        <div class="toast-container position-static">
+        <% @reviews.each do |review| %>
+          <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <!--<img src="..." class="rounded me-2" alt="...">-->
+              <strong class="me-auto"> 
+                <span class="review-name"> <%= review.reviewer %> </span>
+              <% s=review.stars %>
+	      <% for i in 1..5 %>
+                <% if i <= s %>
+                <span class="fixed-star active">&#9733;</span>
+                <% else %>
+                <span class="fixed-star">&#9733;</span>
+                <% end %>
+              <% end %>
+              </strong>
+              <small> <%= ((Time.current - review.created_at)/1.day).round %> days ago</small>
+            </div>
+            <div class="toast-body">
+              <%= review.content %>
+            </div>
+          </div>
+        <% end %>
+        </div>
+<% end %>   
+<% if logged_in %>
+     <div class="backdrop rounded-2">     
+        <h2>Tell us about the product</h2>
+        
+        <h4>Add a Review:</h4>
+        <%= form_with model: [ @product, @product.reviews.build ] do |form| %>
+          <div class="field">
+            <input class="hidden" name="review[reviewer]" value="<%= current_user.firstname %> <%= current_user.lastname %>" > 
+          </div>  
+             <p>
+                <label for="rating">Rating:</label><br>
+                <!-- Use stars for ratings -->
+                <span class="review-star">&#9733;</span>
+                <span class="review-star">&#9733;</span>
+                <span class="review-star">&#9733;</span>
+                <span class="review-star">&#9733;</span>
+                <span class="review-star">&#9733;</span>
+            </p>
+            <div class="form-floating field" >
+               <%= form.text_field :content, class: "form-control", id: "content", placeholder: "I loved it"%> 
+               <label for="content" > What would you like to say? </label>
+            </div>
+            <div class="actions">
+                <%= form.submit "Submit", class: "btn btn-outline-warning enter" %>
+            </p>
+        <% end %>
+     </div>
+<% end %>
+</div>
+</body>
+<script>
+   const stars = document.querySelectorAll('.review-star');
+
+stars.forEach(star => {
+    star.addEventListener('click', () => {
+        toggleStars(star);
+    });
+});
+
+function toggleStars(clickedStar) {
+    const clickedIndex = Array.from(stars).indexOf(clickedStar);
+
+    stars.forEach((star, index) => {
+        if (index <= clickedIndex) {
+            star.classList.add('active');
+        } else {
+            star.classList.remove('active');
+        }
+    });
+}
+
+function toggleDetails(element) {
+    element.classList.toggle('active');
+}
+</script> 

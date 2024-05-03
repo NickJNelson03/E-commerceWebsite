@@ -6,5 +6,6 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @brand=Brand.find(@product.brand_id)
+    @reviews=@product.reviews
   end
 end
