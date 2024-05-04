@@ -102,7 +102,7 @@
         <p><%= @product.desc %> </p>
 
         <div class="flex-container">
-            <img src="https://m.media-amazon.com/images/I/7106ob3ATYL._AC_UF894,1000_QL80_.jpg" alt="Product Image" class="product-image" height="250" width="250">
+            <%= image_tag @product.getimage, alt:"Product Image", class:"product-image", height:"500", width:"500" %>
             <div class="info">
                 <p class="price"> $<%= "%.2f" % @product.price %> </p>
                 <p class="stock"> <%= @product.stock %> remaining </p>

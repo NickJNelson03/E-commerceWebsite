@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-
+  
   def product_params
     params.require(:product).permit( :title, :desc, :price, :stock, :brand_id, :image)
   end
