@@ -20,6 +20,9 @@
   .col-auto.input-group {
     width: 2.5in;
   }
+  .col-auto {
+    max-width: 35%;
+  }
   span.field-label {
     font-size: 18pt;
   }
@@ -27,7 +30,16 @@
     text-align: right;
     align-content:center;
   }
-
+  select.form-select {
+    width: 2.9in;
+  }
+  span.nobreak {
+    whitespace: nowrap;
+  }
+  a.brand-btn {
+    background-color: black;
+    color: yellow;
+  } 
 </style>
 
 <%= form_with model: @product do |form| %>
@@ -47,6 +59,20 @@
        </div>
        <div class="col-9">
          <%= form.text_field :title, placeholder: "Name of Product", autofocus: "autofocus",class: 'form-control' %>
+       </div>
+     </div>
+     <div class='field row align-items-center'>
+       <div class="col-sm col-2">
+         <span class="field-label"> Brand: </span>
+       </div>
+       <div class="col-9">
+         <select class="form-select" aria-label="Brand select">
+           <option selected> Select an existing brand </option>
+         <% @brands.each do |brand| %>
+           <option value="<%= brand.id %>"> <%= brand.name %> </option>
+         <% end %>
+           <option value="new"> Other... </option>
+         </select>
        </div>
      </div>
      <div class='field'>

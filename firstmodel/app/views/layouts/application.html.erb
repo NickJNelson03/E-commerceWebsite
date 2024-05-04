@@ -86,6 +86,11 @@
         <li class="nav-item">
           <a class="nav-link nav-text" href="/products" id="productsLink">Products</a>
         </li>
+      <% if user_signed_in? and ["s","a"].include? current_user.account_type %>
+        <li>
+          <a class="nav-link nav-text" href="/products/new" id="newProductsLink"> Add Product </a>
+        </li>
+      <% end %>
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
