@@ -1,11 +1,79 @@
+<style>
+  .backdrop {
+    padding:.25in;
+    margin-top:.5in;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #b3992e66;
+    width: 60%;
+  }
+  .backdrop * {
+    color: #5e5022;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  .field {
+    margin-bottom: 15px;
+  }
+  .col-auto.input-group {
+    width: 2.5in;
+  }
+  span.field-label {
+    font-size: 18pt;
+  }
+  div.col-2, div.col-3 {
+    text-align: right;
+    align-content:center;
+  }
+
+</style>
+
 <%= form_with model: @product do |form| %>
-   <div class="backdrop">
-     <%= form.file_field :image, placeholder: "Product Image" %>
-     <%= form.text_field :title, placeholder: "Name of Product", autofocus: "autofocus" %>
-     <%= form.hidden_field :brand_id %>
-     <%= form.text_field :desc, placeholder: "Description" %>
-     <%= form.number_field :price, in: 0.50..10000.00, step: 0.01, placeholder: "Price" %>
-     <%= form.number_field :stock, in: 1..10000, step: 1, placeholder: "Stock" %>
-     <%= form.submit %>
+   <div class="backdrop rounded-3">
+     <h1> Add Product </h1>
+     <div class='field row'>
+       <div class="col-sm col-2">
+         <span class="field-label"> Image: </span>
+       </div>
+       <div class="col-9">
+         <%= form.file_field :image, placeholder: "Product Image", class: 'form-control' %>
+       </div>
+     </div>
+     <div class='field row'>
+       <div class="col-sm col-2">
+         <span class="field-label"> Title: </span>
+       </div>
+       <div class="col-9">
+         <%= form.text_field :title, placeholder: "Name of Product", autofocus: "autofocus",class: 'form-control' %>
+       </div>
+     </div>
+     <div class='field'>
+       <%= form.hidden_field :brand_id %>
+     </div>
+     <div class='field row'>
+       <div class="col-sm col-2">
+         <span class="field-label"> Description: </span>
+       </div>
+       <div class="col-9">
+         <%= form.text_area :desc, placeholder: "Description", class: 'form-control'%>
+       </div>
+     </div>
+     <div class='field row g-3'>
+       <div class='col-3'> 
+         <span class="field-label"> Details: </span>
+       </div>
+       <div class='col-auto input-group'>
+         <span class='input-group-text'> $ </span>
+         <%= form.number_field :price, in: 0.50..10000.00, step: 0.01, placeholder: "Price", class: 'form-control'%>
+       </div>
+       <div class='col-auto'>
+         <%= form.number_field :stock, in: 1..10000, step: 1, placeholder: "Stock", class: 'form-control' %>
+       </div>
+     </div>     
+     <div class='actions'>
+       <%= form.submit %>
+     </div>
    </div>
 <% end %>
