@@ -89,103 +89,161 @@
 
 <style>
   html {
-    position:relative;
-  }
+  position:relative;
+}
 
-  body {
-    padding-bottom: 2in;
-  }
-  .lead.title {
-    font-size: 50;
-    letter-spacing: -1pt;
-  }
+.backdrop * {
+  color: #5e5022;
+}
 
-  .backdrop {
-    color: #5e5022;
-    background-color: #b79b2d;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2in;
-    padding-bottom: .5in;
-    padding-top: .25in;
-    width: fit-content;
-  }
+.lead.title {
+  font-size: xx-large;
+  letter-spacing: -1pt;
+  margin-bottom: 20px;
+}
 
-  .form-floating {
-    width: 100%;
-    max-width: 6in;
-  }
+.backdrop {
+  background-color: #b79b2d;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2in;
+  margin-bottom: 6in;
+  padding-bottom: .25in;
+  padding-top: .25in;
+  width: 6in;
+}
 
-  .row {
-    margin-bottom: 7%;
-  }
-  .row label {
-    margin-left: 3%;
-  }
+.form-check {
+  text-align: left;
+  margin-left:10%;
+  padding-bottom: 10px;
+}
 
-  .container-fluid.text-align-left {
-    padding-top: .25in;
-    padding-bottom: .25in;
-    padding-left: .4in;
-    font-size: larger;
-  }
+.form-floating {
+  width: 80%;
+  max-width: 6in;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.row {
+  margin-bottom: 5%;
+}
+.row label {
+  margin-left: 3%;
+}
+
+.submit {
+  margin-bottom: 3%;
+}
+
+input.enter {
+  scale: 120%;
+  background-color: #5e5022;
+  color: #fac823;
+  margin-bottom: 15px;
+}
 
 </style>
 
 <div class="backdrop rounded-4 danger">
-  <div class="container-fluid text-center">
-    <p class="lead title"> Sign up for a </p>
-
-    <div class="container-fluid text-align-left">
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-        <label class="form-check-label" for="exampleRadios1">
-          Buyer Account
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-        <label class="form-check-label" for="exampleRadios2">
-          Seller Account
-        </label>
-      </div>
+<div class="container-fluid text-center">
+  <p class="lead title"> Sign up for a </p>
+  <%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), layout: :floating) do |f| %>
+  <div class="container-fluid text-align-left" id="radioTypeForm">
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="Radios" id="buyerbutton" value="b" checked>
+      <label class="form-check-label" for="buyerbutton">
+        Buyer Account
+      </label>
     </div>
-
-    <div class="row justify-content-center">
-      <div class="form-floating mb-3">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-        <label for="floatingInput">Email address</label>
-      </div>
-
-      <div class="w-100 d-sm-block"></div>
-
-      <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-        <label for="floatingPassword">Password</label>
-      </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="Radios" id="sellerbutton" value="s">
+      <label class="form-check-label" for="sellerbutton">
+        Seller Account
+      </label>
     </div>
-
-    <p class="lead">
-      Already have an account? 
-      <a class="link-warning link-underline-opacity-0 link-underline-opacity-50-hover" id="toggleLink" href="/signup">Log in</a>
-    </p>
+    <input type="hidden" id="user_account_type" name="user[account_type]" value="">
   </div>
+
+  <div class="field">
+    <%= f.text_field :firstname, label: "First Name", autofocus: true, autocomplete: "given-name",
+        control_class: "form-control", placeholder: "Mister", wrapper: {class: 'form-floating mb-3'}%>
+  </div>
+
+  <div class="field">
+    <%= f.text_field :lastname, label: "Last Name", autocomplete: "family-name", control_class: "form-control", placeholder: "Business", wrapper: {class: 'form-floating mb-3'}%>
+  </div>
+
+
+  <div class="field">
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", control_class: "form-control", placeholder: "name@example.com", wrapper: {class: 'form-floating mb-3'}%>
+  </div>
+
+  <div class="field">
+    <%= f.password_field :password, autocomplete: "new-password", control_class: "form-control", placeholder: "password", wrapper: {class: 'form-floating mb-3'} %>
+  </div>
+
+  <div class="field">
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", control_class: "form-control", placeholder: "password", wrapper: {class: 'form-floating mb-3'} %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit  "Sign up", class: "btn btn-outline-warning enter" %>
+  </div>
+
+  <p class="lead">
+    Already have an account?
+    <a class="link-warning link-underline-opacity-0 link-underline-opacity-50-hover" id="toggleLink" href="/users/sign_in">Log in</a>
+  </p>
+  <%end%>
+</div>
 </div>
 
 <script>
-  //deselect any page 
-  var i=0
-  if(i==0) {
-    var rm=document.querySelector('.active');
-    rm.classList.remove("active");
-  i++
-  }
+//deselect any page
+var i=0
+if(i==0) {
+  var rm=document.querySelector('.active');
+  rm.classList.remove("active");
+i++
+}
 
-  //select account button
-  var acctbtn=document.querySelector(".account-button");
-  console.log(acctbtn);
-  acctbtn.classList.add("active");
+//select account button
+var acctbtn=document.querySelector(".account-button");
+//console.log(acctbtn);
+acctbtn.classList.add("active");
 
-  //change link color
-  document.getElementById("")
+//change link color
+document.getElementById("")
+
+  function rearrange(active) {
+  children=active.children
+    first=children[0]
+    console.log(active,children,first)
+    active.removeChild(first)
+    active.appendChild(first)
+}
+
+function checkOrientation(parent) {
+  return (parent.children[0].nodeName == 'INPUT')
+}
+
+forminputs=document.querySelectorAll(".form-floating")
+
+//read radio and update hidden input
+  function updateTypeForm(type) {
+  hideInput=document.getElementById("user_account_type")
+  hideInput.value=type
+}
+function getRadioValue(radioDivId) {
+  checked=document.querySelector(".form-check :checked")
+}
+document.getElementById("radioTypeForm").addEventListener('click', function(e){
+  val=document.querySelector(".form-check :checked").value
+  updateTypeForm(val)
+})
+
+val=document.querySelector(".form-check :checked").value
+updateTypeForm(val)
 </script>
