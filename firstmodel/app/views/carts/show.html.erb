@@ -1,4 +1,13 @@
+<!-- Cart View -->
 <h1>Your Shopping Cart</h1>
+
+<!-- Display Flash Messages -->
+<% if flash[:notice] %>
+  <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+<% if flash[:alert] %>
+  <p class="alert"><%= flash[:alert] %></p>
+<% end %>
 
 <% if @cart.cart_items.empty? %>
   <p>Your cart is empty.</p>
@@ -7,8 +16,9 @@
     <% @cart.cart_items.each do |item| %>
       <li>
         <%= item.product.title %> - Quantity: <%= item.quantity %>
-        <%= button_to 'Remove', cart_item_path(item), method: :delete %>
-        <!-- Add form for updating quantity -->
+        <!-- Remove button with confirmation -->
+        <%= button_to 'Remove', cart_item_path(item), method: :delete, data: { confirm: 'Are you sure you want to remove this item?' } %>
+        <!-- Update quantity form -->
         <%= form_with(model: [item], method: :patch, local: true) do |form| %>
           <%= form.number_field :quantity, min: 1 %>
           <%= form.submit "Update" %>
@@ -19,3 +29,13 @@
 <% end %>
 
 <%= link_to 'Continue Shopping', products_path %>
+
+<!-- Styles (Placeholder for your actual CSS) -->
+<style>
+  .notice, .alert {
+    color: red;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+  }
+</style>

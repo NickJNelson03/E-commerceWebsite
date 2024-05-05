@@ -1,3 +1,4 @@
+<!-- Products Index View with Cards -->
 <style>
 .card {
     width: 100%;
@@ -6,12 +7,12 @@
     background-color: #714d22;
 }
 .card-img-top {
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
 }
 
 .card-text {
-    white-space:wrap;
+    white-space: wrap;
     font-size: smaller;
 }
 
@@ -21,13 +22,9 @@
 
 .col.info {
     white-space: nowrap;
-    padding-left: 5    <div class="col">
-      One of three columns
-    </div>
-    <div class="col">
-      One of three columns
-    </div>px;
-    padding-right 0px;
+    padding-left: 5px;
+    padding-right: 0px;
+}
 </style>
 
 <h1>All Products</h1>
@@ -37,33 +34,37 @@
       <div class="card">
         <img src="https://digital.kenyon.edu/baly/1756/preview.jpg" class="card-img-top" alt="...">
         <div class="card-body">
-        <h5 class="card-title">
-          <a href="/products/<%= product.id %>">
-            <%= product.title %>
-          </a>
-        </h5>
-        <div class="card-text container text-center">
-          <div class="row align-items-end">
-            <div class="col info">
-	      Price:
-              $<%= "%.2f" % product.price %>
+          <h5 class="card-title">
+            <a href="/products/<%= product.id %>">
+              <%= product.title %>
+            </a>
+          </h5>
+          <div class="card-text container text-center">
+            <div class="row align-items-end">
+              <div class="col info">
+	              Price: $<%= "%.2f" % product.price %>
+              </div>
+              <div class="col info">
+                <%= product.stock %> remaining
+              </div>
             </div>
-            <div class="col info">
-              <%= product.stock %> 
-              remaining
-            </div>
+            <!-- Add to Cart Form -->
+            <%= form_with url: cart_items_path, local: true do |form| %>
+              <%= form.hidden_field :product_id, value: product.id %>
+              <%= form.number_field :quantity, value: 1, min: 1, class: 'form-control-sm' %>
+              <%= form.submit "Add to Cart", class: 'btn btn-primary btn-sm' %>
+            <% end %>
           </div>
         </div>
       </div>
     </div>
-  </div>
   <% end %>
 </div>
-  
 
 <script>
-  rm=document.querySelector(".active");
+  // Ensure the active link is highlighted in the navigation
+  var rm = document.querySelector(".active");
   rm.classList.remove("active");
-  add=document.getElementById("productsLink");
+  var add = document.getElementById("productsLink");
   add.classList.add("active");
 </script>

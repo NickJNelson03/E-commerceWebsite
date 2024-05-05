@@ -1,30 +1,34 @@
-# app/controllers/cart_items_controller.rb
 class CartItemsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_cart_item, only: [:update, :destroy]
 
   def create
     @cart = current_cart
-    product = Product.find(cart_item_params[:product_id])
-    @cart_item = @cart.add_product(product.id, cart_item_params[:quantity])
+    product = Product.find_by(id: cart_item_params[:product_id])
+    unless product
+      redirect_to products_url, alert: 'Product not found.'
+      return
+    end
 
-    if @cart_item.save
-      redirect_to cart_path, notice: 'Product added to cart.'
+    @cart_item = @cart.add_product(product.id, cart_item_params[:quantity])
+    if @cart_item && @cart_item.save
+      redirect_to cart_path(@cart), notice: 'Product added to cart.'
     else
-      redirect_to products_url, alert: 'Unable to add product.'
+      redirect_to products_url, alert: 'Unable to add product. Exceeds available stock.'
     end
   end
 
   def update
     if @cart_item.update(cart_item_params)
-      redirect_to cart_path, notice: 'Cart item was successfully updated.'
+      redirect_to cart_path(@cart), notice: 'Cart item was successfully updated.'
     else
-      redirect_to cart_path, alert: 'Error updating cart item.'
+      redirect_to cart_path(@cart), alert: 'Error updating cart item. Exceeds available stock.'
     end
   end
 
   def destroy
     @cart_item.destroy
-    redirect_to cart_path, notice: 'Cart item was successfully removed.'
+    redirect_to cart_path(@cart), notice: 'Cart item was successfully removed.'
   end
 
   private
@@ -38,6 +42,6 @@ class CartItemsController < ApplicationController
   end
 
   def current_cart
-    Cart.find(session[:cart_id])  # This needs to be defined based on how you handle carts in your app
+    user_signed_in? ? current_user.cart : nil
   end
 end
