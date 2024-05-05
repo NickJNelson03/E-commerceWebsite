@@ -12,6 +12,7 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
     @brands = Brand.all
+    @brand = Brand.new
   end
 
   def create

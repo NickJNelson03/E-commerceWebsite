@@ -42,6 +42,10 @@
   } 
 </style>
 
+<% content_for :head do %>
+  <%= javascript_import_module_tag "application" %>
+<% end %>
+
 <%= form_with model: @product do |form| %>
    <div class="backdrop rounded-3">
      <h1> Add Product </h1>
@@ -75,6 +79,10 @@
          </select>
        </div>
      </div>
+     <div id="createBrand">
+       <%= render 'brands/form'%>
+     </div>
+
      <div class='field'>
        <%= form.hidden_field :brand_id %>
      </div>
@@ -103,3 +111,7 @@
      </div>
    </div>
 <% end %>
+
+<script>
+  changeNavSelect("newProductsLink")
+</script>
