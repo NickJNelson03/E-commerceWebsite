@@ -1,0 +1,13 @@
+<% if user_signed_in? %>
+  <% cart = current_user.cart %>
+  <div class="cart">
+    <%= link_to cart_path(cart), class: 'cart-link' do %>
+      <div class="cart-icon">
+        🛒
+      </div>
+      <div class="cart-info">
+        <%= pluralize(cart.cart_items.sum(:quantity), 'item') %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
