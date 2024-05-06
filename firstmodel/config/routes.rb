@@ -26,8 +26,8 @@ Rails.application.routes.draw do
   end
 
   # Cart Routes
-  resource :cart, only: [:show]  # Singular resource for cart
-  resources :cart_items, only: [:create, :update, :destroy]  # Routes for managing cart items
+  resources :cart_items, only: [:create, :update, :destroy]
+  resources :carts, only: [:show, :edit, :update, :destroy]
 
   
 end
