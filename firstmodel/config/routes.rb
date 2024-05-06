@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -23,4 +24,10 @@ Rails.application.routes.draw do
   resources :products do
     resources :reviews
   end
+
+  # Cart Routes
+  resource :cart, only: [:show]  # Singular resource for cart
+  resources :cart_items, only: [:create, :update, :destroy]  # Routes for managing cart items
+
+  
 end
