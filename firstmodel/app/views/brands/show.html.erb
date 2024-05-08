@@ -1,19 +1,50 @@
 
 
-<div class="container text-center">
-    <div class="row align-items-start">
-      <div class="col">
-        <img src=<%= @brand.logo %> 
+<style>
+  .container {
+    background-color: #c8970082;
+    height: 100%;
+    padding: .5in
+  }
+  .logo-img {
+    height: auto;
+    width: 250px; 
+  }
+  .header {
+    background-color: #00000040;
+  }
+  .col {
+    height: 2.5in;
+    align-content: center;
+  }
+  p {
+    font-size: larger;
+  }
+  hr {
+    color: black;
+    outline-style: solid;
+  }
+</style
+
+<div class="backdrop">
+    <div class="row header rounded-2 align-items-start">
+      <div class="col logoplace">
+        <%= image_tag @brand.getimage, class: "logo-img rounded-1" %> 
       </div>
-      <div class="col">
-        <h1> <%= @brand.name %> </h1>
+      <div class="col titleplace">
+        <h1 class="display-1"> <%= @brand.name %> </h1>
       </div>
     </div>
     <div class="row align-items-start">
         <div class="col">
             <p>
                <%= @brand.desc %>
-            </p> 
+            </p>
+            <hr> 
         </div>
     </div>
 </div>
+
+<script>
+  changeNavSelect("brandsLink")
+</script>

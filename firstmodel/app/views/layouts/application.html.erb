@@ -19,9 +19,16 @@
     .navbar {
         font-weight: 500;
         background: linear-gradient(to right, #ad9f66,black);
-      }
+    }
+    .nav-item {
+       align-self:center;
+    }
     .nav-text {
         color: #fac823;
+        text-align: center;
+    }
+    .show ul li.nav-item, .collapsing li.nav-item {
+      align-self: start;
     }
     .nav-link.active.nav-text {
       color: #5f5122;
@@ -47,7 +54,7 @@
       outline-color: #f6f6f6;
     }
 
-    .show .account-button {
+    .show .account-button, .collapsing .account-button {
       margin-top: 10px;
       color: #5f5122;
     }
@@ -58,6 +65,7 @@
       background-color: #1f1e24;
       outline-color: #f4ca34;
       outline-width: 2px;
+      width: 2in;
     }
 
     .dropdown-item {
@@ -71,6 +79,17 @@
   </style>
 
   <script>
+    function adjustDropdown(w) {
+      var dropdown=document.querySelector(".dropdown-menu")
+      if (w < 992) {
+        dropdown.classList.remove("dropdown-menu-end");
+        dropdown.classList.add("dropdown-menu-start");
+      }
+      else {
+        dropdown.classList.remove("dropdown-menu-start");
+        dropdown.classList.add("dropdown-menu-end");
+      }  
+    }
     function changeNavSelect(id) {
       rm=document.querySelector(".active");
       rm.classList.remove("active");
@@ -96,8 +115,11 @@
           <a class="nav-link nav-text" href="/products" id="productsLink">Products</a>
         </li>
       <% if user_signed_in? and ["s","a"].include? current_user.account_type %>
-        <li>
+        <li class="nav-item">
           <a class="nav-link nav-text" href="/products/new" id="newProductsLink"> Add Product </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-text" href="/brands/new" id="newBrandsLink"> Add Brand </a>
         </li>
       <% end %>
       </ul>
@@ -126,7 +148,17 @@
     </div>
   </div>
 </nav>
-
+<script>
+  var startingwidth=window.innerWidth;
+  adjustDropdown(startingwidth);
+  window.addEventListener("resize", function(e) {
+    var w=window.innerWidth;
+    adjustDropdown(w)
+    if (w > 991) {
+      document.querySelector(".navbar-collapse").classList.remove("show")
+    }
+  })
+</script>
   <body>
     <div class="container">
       <% if notice %>

@@ -7,11 +7,11 @@ class BrandsController < ApplicationController
     @brand = Brand.find(params[:id])
   end
 
-  def create
+  def new
     @brand = Brand.new
   end
 
-  def new 
+  def create 
     @brand = Brand.new(brand_params)
 
     if @brand.save
@@ -21,7 +21,9 @@ class BrandsController < ApplicationController
     end
   end
 
+private
+
   def brand_params
-    params.require(:product).permit( :name, :desc, :image, :owner)
+    params.require(:brand).permit(:name, :desc, :logo)
   end   
 end

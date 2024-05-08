@@ -4,22 +4,24 @@
     }
     .brand-logo {
         height: 2in;
-        width: 2in;
+        width: 2.5in;
     }
 
     .list-group-item {
-        background-color: #9f9363;
+        background-color: #c59e00;
         padding-left: 10px;
+        margin-bottom: 10px;
     }
 
     div.col-3.logoplace {
         padding: 0in;
-        
+        min-width: 200px
     }
 
-    .col.brandname{
+    .col.brand-name{
         padding-top: auto;
         padding-bottom: auto;
+        margin-left: .5in;
     }
     .container {
         margin: 0in;
@@ -34,7 +36,7 @@
         <div class="container">
           <div class="row align-items-start">
             <div class="col-3 logoplace">
-              <img src="<%= brand.logo %>" class="brand-logo">
+              <%= image_tag brand.getimage, class: "brand-logo" %>
             </div>
             <div class="col brand-name">
               <h1><%= brand.name %></h1>
@@ -48,8 +50,5 @@
   
 
   <script>
-    rm=document.querySelector('.active');
-    rm.classList.remove("active");
-    add=document.getElementById("brandsLink");
-    add.classList.add("active");
+   changeNavSelect("brandsLink")
   </script>
