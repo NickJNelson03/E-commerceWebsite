@@ -1,0 +1,63 @@
+   <%= form_with model: @product do |form| %>
+     <div class='field row'>
+       <div class="col-sm col-2">
+         <span class="field-label"> Image: </span>
+       </div>
+       <div class="col-9">
+         <%= form.file_field :image, placeholder: "Product Image", class: 'form-control' %>
+       </div>
+     </div>
+     <div class='field row'>
+       <div class="col-sm col-2">
+         <span class="field-label"> Title: </span>
+       </div>
+       <div class="col-9">
+         <%= form.text_field :title, placeholder: "Name of Product", autofocus: "autofocus",class: 'form-control' %>
+       </div>
+     </div>
+     <div class='field row align-items-center'>
+       <div class="col col-3">
+         <span class="field-label"> Brand: </span>
+       </div>
+       <div class="col-7 brandcol">
+         <select class="form-select" aria-label="Brand select">
+           <option selected> Select an existing brand </option>
+         <% @brands.each do |brand| %>
+           <option value="<%= brand.id %>"> <%= brand.name %> </option>
+         <% end %>
+         </select>
+       </div>
+       <div class="col">
+       <a class="btn brand-btn" href="/brands/new"> or Add Brand... </a>
+       </div>
+     </div>
+     <div class='field'>
+       <%= form.hidden_field :brand_id %>
+       <%= form.hidden_field :user_id, value: current_user.id %>
+     </div>
+     <div class='field row'>
+       <div class="col-sm col-2">
+         <span class="field-label"> Description: </span>
+       </div>
+       <div class="col-9">
+         <%= form.text_area :desc, placeholder: "Description", class: 'form-control'%>
+       </div>
+     </div>
+     <div class='field row g-3'>
+       <div class='col-3'>
+         <span class="field-label"> Details: </span>
+       </div>
+       <div class='col-auto input-group'>
+         <span class='input-group-text'> $ </span>
+         <%= form.number_field :price, in: 0.50..10000.00, step: 0.01, placeholder: "Price", class: 'form-control'%>
+       </div>
+       <div class='col-auto'>
+         <%= form.number_field :stock, in: 1..10000, step: 1, placeholder: "Stock", class: 'form-control' %>
+       </div>
+     </div>
+     <div class='actions row justify-content-center'>
+       <div class="col-auto">
+         <%= form.submit class: "btn submit-btn" %>
+       </div>
+     </div>
+     <% end %>
