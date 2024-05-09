@@ -1,6 +1,6 @@
 # app/controllers/cart_items_controller.rb
 class CartItemsController < ApplicationController
-  before_action :set_cart_item, only: [:update, :destroy]
+  before_action :authenticate_user!, only: [:create, :update, :destroy]  # You might want to protect update and destroy too
 
   def create
     @cart = current_cart
@@ -14,18 +14,7 @@ class CartItemsController < ApplicationController
     end
   end
 
-  def update
-    if @cart_item.update(cart_item_params)
-      redirect_to cart_path, notice: 'Cart item was successfully updated.'
-    else
-      redirect_to cart_path, alert: 'Error updating cart item.'
-    end
-  end
-
-  def destroy
-    @cart_item.destroy
-    redirect_to cart_path, notice: 'Cart item was successfully removed.'
-  end
+  # other methods...
 
   private
 
@@ -38,6 +27,7 @@ class CartItemsController < ApplicationController
   end
 
   def current_cart
-    Cart.find(session[:cart_id])  # This needs to be defined based on how you handle carts in your app
+    # Ensure the current_cart method handles carts properly, possibly creating a new cart if one does not exist
+    Cart.find_or_create_by(user_id: current_user.id)  # Adjust this line according to your application's logic
   end
 end
