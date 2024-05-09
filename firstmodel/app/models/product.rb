@@ -16,5 +16,4 @@ class Product < ApplicationRecord
       return self.image
     end
   end
->>>>>>> origin/main
 end
