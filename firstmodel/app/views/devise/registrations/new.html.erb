@@ -3,10 +3,13 @@
     position:relative;
   }
 
+  .backdrop * {
+    color: #5e5022;  
+  }
+
   .lead.title {
     font-size: xx-large;
     letter-spacing: -1pt;
-    color: #5e5022;
     margin-bottom: 20px;
   }
 
@@ -45,10 +48,11 @@
     margin-bottom: 3%;
   }
 
-  .enter {
+  input.enter {
     scale: 120%;
     background-color: #5e5022;
-    color: #b79b2d;
+    color: #fac823;
+    margin-bottom: 15px;
   }
 
 </style>
@@ -72,17 +76,27 @@
       </div>
       <input type="hidden" id="user_account_type" name="user[account_type]" value="">
     </div>
-
+    
     <div class="field">
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", control_class: "form-control", wrapper: {class: 'form-floating mb-3'}%>
+      <%= f.text_field :firstname, label: "First Name", autofocus: true, autocomplete: "given-name",
+          control_class: "form-control", placeholder: "Mister", wrapper: {class: 'form-floating mb-3'}%>
     </div>
 
     <div class="field">
-      <%= f.password_field :password, autocomplete: "new-password", control_class: "form-control", wrapper: {class: 'form-floating mb-3'} %>
+      <%= f.text_field :lastname, label: "Last Name", autocomplete: "family-name", control_class: "form-control", placeholder: "Business", wrapper: {class: 'form-floating mb-3'}%>
+    </div>
+
+    
+    <div class="field">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", control_class: "form-control", placeholder: "name@example.com", wrapper: {class: 'form-floating mb-3'}%>
     </div>
 
     <div class="field">
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", control_class: "form-control", wrapper: {class: 'form-floating mb-3'} %>
+      <%= f.password_field :password, autocomplete: "new-password", control_class: "form-control", placeholder: "password", wrapper: {class: 'form-floating mb-3'} %>
+    </div>
+
+    <div class="field">
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", control_class: "form-control", placeholder: "password", wrapper: {class: 'form-floating mb-3'} %>
     </div>
     
     <div class="actions">
@@ -108,7 +122,7 @@
 
   //select account button
   var acctbtn=document.querySelector(".account-button");
-  console.log(acctbtn);
+  //console.log(acctbtn);
   acctbtn.classList.add("active");
 
   //change link color
@@ -127,27 +141,6 @@
   }
   
   forminputs=document.querySelectorAll(".form-floating")
-  for (var input of forminputs) {
-    input.addEventListener('focusout',function(e) {
-      if (e.target.value === "") {
-        active=e.target.parentElement
-        if (checkOrientation(active) === true) {
-          rearrange(active)
-        }
-      }
-    })
-
-    input.addEventListener('focusin',function(e){
-      if (e.target.value === "") {
-        active=e.target.parentElement
-	console.log(checkOrientation(active), "work")
-	if (checkOrientation(active) === false) {
-          rearrange(active)
-        }
-      }
-    })
-  rearrange(input)
-  }
 
   //read radio and update hidden input
     function updateTypeForm(type) {
