@@ -226,7 +226,7 @@
           <div class="field">
             <input class="hidden" name="review[reviewer]" value="<%= current_user.firstname %> <%= current_user.lastname %>" > 
             <input class="hidden" name="review[stars]" value id="starInput">
-            <%= form.hidden :user_id, value: current_user.id %> 
+            <%= form.hidden_field :user_id, value: current_user.id %> 
           </div>  
              <p>
                 <label for="rating">Rating:</label><br>
