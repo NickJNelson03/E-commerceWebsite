@@ -79,3 +79,5 @@ end
 gem "importmap-rails", "~> 2.0"
 
 gem "devise", "~> 4.9"
+
+gem 'stripe'
