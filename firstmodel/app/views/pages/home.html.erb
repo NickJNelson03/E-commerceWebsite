@@ -131,7 +131,7 @@
   }
   .product.active .product-details {
     display: block;
-  } 
+  }
   @keyframes slide-up {
     from {
       transform: translateY(50px);
@@ -199,53 +199,22 @@
 </a>
         <section class="products">
           <div class="row">
+          <% @sample.each do |product| %>
             <div class="col-md-3">
                 <div class="product" onclick="toggleDetails(this)">
-                    <img src="https://m.media-amazon.com/images/I/71Er0a9stOL._AC_UF894,1000_QL80_.jpg" alt="Product Image" height="200" width="200">
-                    <h3>Product Name</h3>
-                    <p>$120.99</p>
+                    <%= image_tag product.getimage, alt: "Product Image", width: "250" %>
+                    <h3> <%= product.title %> </h3>
+                    <p> $<%= "%.2f" % product.price %> </p>
                     <div class="product-details">
-                        <p>Another World class Calculator</p>
+                        <p><%= product.desc %> </p>
                         <button class="btn btn-primary">Add to Cart</button>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="product" onclick="toggleDetails(this)">
-                    <img src="https://m.media-amazon.com/images/I/61jAcXAbZrL._AC_UF894,1000_QL80_.jpg" alt="Product Image" height="200" width="200">
-                    <h3>Product Name</h3>
-                    <p>$99.99</p>
-                    <div class="product-details">
-                        <p>Calculator 2</p>
-                        <button class="btn btn-primary">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="product" onclick="toggleDetails(this)">
-                    <img src="https://www.schoolmart.com/wp-content/uploads/2016/04/TI-30XS_MV_hi-1.jpg" alt="Product Image" height="200" width="200">
-                    <h3>Product Name</h3>
-                    <p>$59.99</p>
-                    <div class="product-details">
-                        <p>Calculator 3</p>
-                        <button class="btn btn-primary">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="product" onclick="toggleDetails(this)">
-                    <img src="https://www.schooldepot.co.nz/cdn/shop/products/Jastek-Scientific-Calculator-JasCS1.jpg?v=1656824191" alt="Product Image" height="200" width="200">
-                    <h3>Product Name</h3>
-                    <p>$48.99</p>
-                    <div class="product-details">
-                        <p>Calculator 4</p>
-                        <button class="btn btn-primary">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
+          <% end %>
         </div>
     </div>
-        
+
         </section>
     </main>
     <footer>
