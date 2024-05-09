@@ -7,15 +7,16 @@ class CartItemsController < ApplicationController
     product = Product.find(cart_item_params[:product_id])
     @cart_item = @cart.add_product(product.id, cart_item_params[:quantity])
 
-    if @cart_item.save
-      redirect_to cart_path, notice: 'Product added to cart.'
-    else
-      render :new, alert: 'Unable to add product to cart.'  # Ensure you have a 'new' view if using this
-      # Alternatively, you can redirect back to the product page:
-      # redirect_to product, alert: 'Unable to add product to cart.'
+    respond_to do |format|
+      if @cart_item.save
+        format.html { redirect_back fallback_location: root_path }
+        format.js   # This will look for a file called create.js.erb
+      else
+        format.html { redirect_back fallback_location: product_path(product), alert: 'Unable to add product.' }
+        format.js
+      end
     end
   end
-
   # other methods...
 
   private

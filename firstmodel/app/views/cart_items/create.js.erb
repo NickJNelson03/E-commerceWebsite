@@ -1,0 +1,6 @@
+<% if @cart_item.persisted? %>
+  alert('Product added to cart.');
+  // Update parts of your page here, like the cart item count or showing a confirmation message
+<% else %>
+  alert('Failed to add product to cart.');
+<% end %>
