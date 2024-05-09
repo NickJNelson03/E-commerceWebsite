@@ -9,6 +9,11 @@ class ProductsController < ApplicationController
     @reviews=@product.reviews
   end
 
+  def edit
+    @product = Product.find(params[:id])
+    @brands = Brand.all
+  end
+
   def new
     @product = Product.new
     @brands = Brand.all
@@ -16,6 +21,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    @brands = Brand.all
     
     if @product.save
       redirect_to @product
@@ -24,8 +30,15 @@ class ProductsController < ApplicationController
     end
   end
   
+  def destroy
+    @product = Product.find(params[:id])
+    @product.destroy
+
+    redirect_to products#index
+  end
+private  
   def product_params
-    params.require(:product).permit( :title, :desc, :price, :stock, :brand_id, :image)
+    params.require(:product).permit( :title, :desc, :price, :stock, :brand_id, :user_id, :image)
   end
 
 end
