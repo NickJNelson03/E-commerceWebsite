@@ -7,6 +7,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @brand=Brand.find(@product.brand_id)
     @reviews=@product.reviews
+    @sample=@product.pickRandom(4,Product)
   end
 
   def edit
