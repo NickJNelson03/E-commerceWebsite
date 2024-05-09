@@ -16,6 +16,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    @brands = Brand.all
     
     if @product.save
       redirect_to @product
@@ -25,7 +26,7 @@ class ProductsController < ApplicationController
   end
   
   def product_params
-    params.require(:product).permit( :title, :desc, :price, :stock, :brand_id, :image)
+    params.require(:product).permit( :title, :desc, :price, :stock, :brand_id, :user_id, :image)
   end
 
 end

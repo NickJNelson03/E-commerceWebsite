@@ -95,6 +95,7 @@
      </div>
      <div class='field'>
        <%= form.hidden_field :brand_id %>
+       <%= form.hidden_field :user_id, value: current_user.id %>
      </div>
      <div class='field row'>
        <div class="col-sm col-2">
@@ -125,5 +126,12 @@
 <% end %>
 
 <script>
-  changeNavSelect("newProductsLink")
+  changeNavSelect("newProductsLink");
+  
+  const formtochange=document.getElementById("product_brand_id")
+  const indicator=document.querySelector("select.form-select")
+  indicator.addEventListener("click", function(e) {
+    val=indicator.value;
+    formtochange.value=val;
+  }) 
 </script>
