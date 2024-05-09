@@ -5,7 +5,7 @@ class BrandsController < ApplicationController
 
   def show
     @brand = Brand.find(params[:id])
-    @sample = @brand.pickProducts(4)
+    @sample = @brand.pickProducts(20)
   end
 
   def new

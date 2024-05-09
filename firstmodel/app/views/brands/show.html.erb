@@ -7,8 +7,8 @@
     padding: .5in
   }
   .logo-img {
-    height: auto;
-    width: 250px; 
+    height: 220px;
+    width: auto; 
   }
   .header {
     background-color: #00000040;
@@ -23,6 +23,32 @@
   hr {
     color: black;
     outline-style: solid;
+  }
+  .product {
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .sampleimage {
+    width: 100%;
+  }
+  .product:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .product img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .product-details {
+    display: none;
+  }
+
+  .product.active .product-details {
+    display: block;
   }
 </style
 
@@ -43,8 +69,31 @@
             <hr> 
         </div>
     </div>
+    <div>
+      <div class="row">
+      <% @sample.each do |s| %>
+        <div class="col-md-3">
+          <div class="product" onclick="toggleDetails(this)">
+            <%= image_tag s.getimage, alt: "Other Product", class: "rounded-1 sampleimage" %>
+            <h3><%= s.title %></h3>
+            <div class="row justify-content-between">
+              <div class="col-4"> $<%= "%.2f" % s.price %>  </div>
+              <div class="col-4"> <%= link_to "View", product_path(s), class: "samplelink" %> </div>
+            </div>
+            <div class="product-details"
+              <p> <%= s.desc[0..40]+"..." %></p>
+              <button class="btn btn-primary">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      </div>
+    </div>
 </div>
 
 <script>
   changeNavSelect("brandsLink")
+  function toggleDetails(element) {
+    element.classList.toggle('active');
+  }
 </script>
