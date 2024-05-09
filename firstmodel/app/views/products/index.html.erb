@@ -47,27 +47,34 @@
       <div class="card">
         <%= image_tag product.getimage, class: "card-img-top" %>
         <div class="card-body">
-        <h5 class="card-title">
-          <a class="card-link" href="/products/<%= product.id %>">
-            <%= product.title %>
-          </a>
-        </h5>
-        <div class="card-text container text-center">
-          <div class="row align-items-end">
-            <div class="col info">
-	      Price:
-              $<%= "%.2f" % product.price %>
+          <h5 class="card-title">
+            <a class="card-link" href="/products/<%= product.id %>">
+              <%= product.title %>
+            </a>
+          </h5>
+          <div class="card-text container text-center">
+            <div class="row align-items-end">
+              <div class="col info">
+                Price: $<%= "%.2f" % product.price %>
+              </div>
+              <div class="col info">
+                <%= product.stock %> remaining
+              </div>
             </div>
-            <div class="col info">
-              <%= product.stock %> 
-              remaining
-            </div>
+            <% if product.stock > 0 %>
+              <%= form_with url: cart_items_path, local: true do |form| %>
+                <%= form.hidden_field :product_id, value: product.id %>
+                <%= form.number_field :quantity, in: 1..product.stock, value: 1, class: 'form-control' %>
+                <%= form.submit 'Add to Cart', class: 'btn btn-primary' %>
+              <% end %> <!-- Closing end for form_with -->
+            <% else %>
+              <span class="text-muted">Out of stock</span>
+            <% end %> <!-- Closing end for if product.stock > 0 -->
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <% end %>
+  <% end %> <!-- Closing end for @products.each do |product| -->
 </div>
   
 
