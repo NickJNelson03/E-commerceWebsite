@@ -14,6 +14,6 @@ Follow these steps to get the project running on your local machine:
 ### 1. Clone the Repository
 Clone the project to your local machine:
 ```bash
-git clone https://github.com/yourusername/your-repository-name.git
+git clone git@github.com:NickJNelson03/E-commerceWebsite.git
 cd your-repository-name
 
