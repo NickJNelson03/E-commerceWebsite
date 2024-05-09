@@ -10,4 +10,20 @@ class Brand < ApplicationRecord
       return self.logo
     end
   end
+  
+  def pickProducts(int)
+    randProds=Array.new
+    used= Array.new
+    pickList=self.products
+    int=[int, pickList.length].min
+    for i in 0...int
+      candidate=pickList[rand(pickList.length)]
+      while used.include? candidate
+        candidate=pickList[rand(pickList.length)]
+      end
+      used.push(candidate)
+      randProds.push(candidate)
+    end
+    return randProds
+  end
 end
