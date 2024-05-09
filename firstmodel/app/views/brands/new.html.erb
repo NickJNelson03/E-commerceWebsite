@@ -1,0 +1,64 @@
+<style>
+  .backdrop {
+    padding:.25in;
+    margin-top:.5in;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #b3992e66;
+    width: 60%;
+    min-width: 7in;
+  }
+  .backdrop * {
+    color: #5e5022;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  .field {
+    margin-bottom: 15px;
+  }
+  .col-auto.input-group {
+    width: 2.5in;
+  }
+  .col-auto {
+    max-width: 35%;
+  }
+  span.field-label {
+    font-size: 18pt;
+  }
+  div.col-2, div.col-3 {
+    text-align: right;
+    align-content:center;
+  }
+  select.form-select {
+    width: 2.9in;
+  }
+  div.brandcol {
+    width: 3in;
+  }
+  span.nobreak {
+    whitespace: nowrap;
+  }
+  a.brand-btn {
+    color: #fac823;
+    font-size: 15.7pt;
+  }
+  .submit-btn {
+    color: #ffd754d1;
+    background-color: #644e13;
+    margin-top: .25in;
+  }
+  .submit-btn:hover {
+    background-color: white;
+  }
+</style>
+
+<div class="backdrop">
+<h1 class="form-title"> Add Brand </h1>
+<%= render "/brands/form" %>
+</div>
+
+<script>
+  changeNavSelect("newBrandsLink")
+</script>

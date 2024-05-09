@@ -1,0 +1,36 @@
+<%= form_with model: @brand do |form| %>
+       
+<div class='field row'>
+  <div class="col-sm col-2">
+    <span class="field-label"> Title: </span>
+  </div>
+  <div class="col-9">
+    <%= form.text_field :name, placeholder: "New brand name", class: 'form-control'%>
+  </div>
+</div>
+
+<div class='field row'>
+  <div class="col-sm col-2">
+    <span class="field-label"> Logo: </span>
+  </div>
+  <div class="col-9">
+    <%= form.file_field :logo, placeholder: "Brand Logo", class: 'form-control' %>
+  </div>
+</div>
+
+<div class='field row'>
+  <div class="col-sm col-2">
+    <span class="field-label"> Description: </span>
+  </div>
+  <div class="col-9">
+    <%= form.text_area :desc, placeholder: "Description", class: 'form-control'%>
+  </div>
+</div>
+<div class="field">
+</div>
+<div class='actions row justify-content-center'>
+  <div class="col-auto">
+    <%= form.submit class: "btn submit-btn" %>
+  </div>
+</div>
+<% end %>
