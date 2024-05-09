@@ -1,10 +1,10 @@
-# app/views/carts/show.html.erb
 <h1>Your Cart</h1>
 <% if @cart.cart_items.any? %>
   <ul>
     <% @cart.cart_items.each do |item| %>
       <li>
         <%= item.product.title %> - Quantity: <%= item.quantity %>
+        <!-- Simplified Remove button -->
         <%= button_to 'Remove', cart_item_path(item), method: :delete, data: { confirm: 'Are you sure?' } %>
       </li>
     <% end %>

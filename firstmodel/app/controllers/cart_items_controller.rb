@@ -17,6 +17,17 @@ class CartItemsController < ApplicationController
       end
     end
   end
+
+  def destroy
+    @cart_item = CartItem.find(params[:id])
+    @cart_item.destroy
+    respond_to do |format|
+      format.html { redirect_to cart_path, notice: 'Item removed successfully.' }
+      format.js   # Handle AJAX response if applicable
+    end
+  end
+
+
   # other methods...
 
   private
