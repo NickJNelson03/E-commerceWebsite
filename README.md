@@ -7,7 +7,6 @@ This repository contains the source code for my e-commerce website built with Ru
 To run this project, you will need the following installed on your system:
 - Ruby (Version 3.0.0 or later)
 - Ruby on Rails (Version 6.1.4 or later)
-- PostgreSQL (or another database system, specify if different)
 
 ## Setup
 Follow these steps to get the project running on your local machine:
