@@ -96,6 +96,17 @@
       padding: .25in;
       margin-top: .25in;
     }
+    .edit {
+      margin-left: 2in;
+      background-color: cornsilk;
+      padding: .25in;
+    }
+    .btn.btn-warning {
+      color: #524224;
+    }
+    .btn.btn-warning:hover {
+      color: #8a8a8a;
+    }
     </style>
     <div class="container">
         <h1><%= @product.title %> </h1>
@@ -108,6 +119,25 @@
                 <p class="stock"> <%= @product.stock %> remaining </p>
                  <button class="btn btn-primary">Add to Cart</button>
             </div>
+            <% if current_user.id == @product.user_id or current_user.account_type == "a"%>
+            <div class="edit rounded-2">
+              <% if current_user.account_type == "s" %>
+	      This product was created by you
+              <% elsif current_user.account_type == "a" %>
+              You have admin access to this item
+              <% end %>
+	      <div class="row editbuttons">
+	        <div class="col">
+	          <%= link_to "Edit", edit_product_path(@product), class: "btn btn-warning" %>
+	        </div>
+	        <div class="col">
+	          <%= link_to "Delete", product_path(@product), class: "btn btn-danger", data:{
+                        turbo_method: :delete,
+                        turbo_confirm: "Remove permanently" } %>
+	        </div>
+              </div>    
+            </div>
+            <% end %>
         </div>
     </div>
     <div class="container">
@@ -215,7 +245,8 @@
         <%= form_with model: [ @product, @product.reviews.build ] do |form| %>
           <div class="field">
             <input class="hidden" name="review[reviewer]" value="<%= current_user.firstname %> <%= current_user.lastname %>" > 
-            <input class="hidden" name="review[stars]" value id="starInput" > 
+            <input class="hidden" name="review[stars]" value id="starInput">
+            <%= form.hidden :user_id, value: current_user.id %> 
           </div>  
              <p>
                 <label for="rating">Rating:</label><br>

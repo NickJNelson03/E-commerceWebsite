@@ -59,18 +59,20 @@
 <% end %>
 
    <div class="backdrop rounded-3">
-     <h1> Add Product </h1>
+     <h1> Edit Product </h1>
      <%= render "form", product: @product %>
    </div>
-   
+
 
 <script>
   changeNavSelect("newProductsLink");
-  
+
   const formtochange=document.getElementById("product_brand_id")
   const indicator=document.querySelector("select.form-select")
   indicator.addEventListener("click", function(e) {
     val=indicator.value;
     formtochange.value=val;
-  }) 
+  })
+  const startingval=formtochange.value
+  indicator.value=startingval
 </script>
