@@ -10,7 +10,9 @@ class CartItemsController < ApplicationController
     if @cart_item.save
       redirect_to cart_path, notice: 'Product added to cart.'
     else
-      redirect_to products_url, alert: 'Unable to add product.'
+      render :new, alert: 'Unable to add product to cart.'  # Ensure you have a 'new' view if using this
+      # Alternatively, you can redirect back to the product page:
+      # redirect_to product, alert: 'Unable to add product to cart.'
     end
   end
 
@@ -23,7 +25,10 @@ class CartItemsController < ApplicationController
   end
 
   def cart_item_params
-    params.require(:cart_item).permit(:product_id, :quantity)
+    {
+    product_id: params[:product_id],
+    quantity: params[:quantity]
+    }
   end
 
   def current_cart
