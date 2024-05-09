@@ -8,6 +8,7 @@ class ProductsController < ApplicationController
     @brand=Brand.find(@product.brand_id)
     @reviews=@product.reviews
     @sample=@product.pickRandom(4,Product)
+    @fakeuser=User.find(2)
   end
 
   def edit
