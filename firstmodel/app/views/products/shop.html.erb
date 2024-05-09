@@ -1,0 +1,23 @@
+<h1>Shop</h1>
+<div class="container">
+  <div class="row">
+    <% @products.each do |product| %>
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <%= image_tag(product.image_url, class: "card-img-top", alt: product.title) if product.image_url.present? %>
+          <div class="card-body">
+            <h5 class="card-title"><%= product.title %></h5>
+            <p class="card-text"><%= truncate(product.description, length: 100) %></p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <%= link_to 'View', product, class: 'btn btn-sm btn-outline-secondary' %>
+                <%= button_to 'Add to Cart', cart_items_path(product_id: product.id, quantity: 1), method: :post, class: 'btn btn-sm btn-primary' %>
+              </div>
+              <small class="text-muted">$<%= product.price %></small>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
