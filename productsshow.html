@@ -1,13 +1,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Sample Nav</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">  
-  </head>
+</head>
   <style>
+    html {
+      background: linear-gradient(to right, #f0dc8d,#3a3945);
+      height: 100%;
+    }
+
     body {
-      font-family: "Helvetica Neue", Helvetica, sans-serif;
-        background: linear-gradient(to right, #f0dc8d,#3a3945);
+      font-family: "Helvetica Neue", Helvetica;
+      background: linear-gradient(to right, #f0dc8d,#3a3945);
+      
     }
     .navbar {
         font-weight: 500;
@@ -36,54 +42,295 @@
       color: #f4ca34;
       outline-color: #f6f6f6;
     }
-  
+
+    .show .account-button {
+      margin-top: 10px;
+      color: #5f5122;
+    }
+
+    .dropdown-menu {
+      width:100%;
+      align-self: self-start;
+      background-color: #1f1e24;
+      outline-color: #f4ca34;
+      outline-width: 2px;
+    }
+
+    .dropdown-item {
+      color: #f4ca34;
+    }
+    
+    .hidden {
+      display: none;
+    }
+
   </style>
 
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Ken-Comm</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active nav-text" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-text" href="#">Brands</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-text" href="#">Products</a>
-          </li>
-        </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-warning" type="submit">Search</button>
-        </form>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Ken-Comm</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> 
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active nav-text" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-text" href="/brands" id="brandsLink">Brands</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-text" href="/products" id="productsLink">Products</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-warning me-3" type="submit">Search</button>
+      </form>
+      <div class="dropdown nav-item">
+        <button type="button" class="dropdown-toggle btn btn-outline-warning me-1 account-button" data-bs-toggle="dropdown" aria-expanded="false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+          </svg>
+        </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <% if user_signed_in? %>
+            <li><a class="dropdown-item acct-ctr" href="/users/info"> Account </a></li>
+            <li><%= link_to "Log Out",destroy_user_session_path, method: :delete, class: "dropdown-item acct-ctr" %></li>
+            <% else %>
+            <li><a class="dropdown-item acct-ctr" href="/users/sign_in"> Log In </a></li>
+            <li><a class="dropdown-item acct-ctr" href="/users/sign_up"> Sign Up </a></li>
+            <% end %>
+          </ul>
       </div>
+
     </div>
-  </nav>
+  </div>
+</nav>
+
+  <body>
+    <div class="container">
+      <% if notice %>
+        <p class="alert alert-success"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
+      <%= yield %>
+    </div>
+  </body>
+</html>
 
 
-<h1><%= @product.title %></h1>
+    <style>
 
-<p><%= @product.description %></p>
 
-<h2>Product Reviews</h2>
-<%= render @product.reviews %>
+        .review-star {
+            color: #a3a29d;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .review-star:hover,
+        .review-star.active {
+         color: #fac823;
+        }
+        .text-background {
+            background-color: #69603f;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .price {
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-right: 20px; /* Add margin between image and price */
+        }
+        .stock {
+            font-size: 1.2rem;
+            color: #f4ca34;
+        }
+        .flex-container {
+            display: flex;
+            align-items: center; /* Center items vertically */
+        }
+        .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        }
+        h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-<h2>Add a Review:</h2>
-<%= form_with model: [ @product, @product.reviews.build ] do |form| %>
-  <p>
-    <%= form.label :rating %><br>
-    <%= form.select :rating, (1..5).to_a %>
-  </p>
-  <p>
-    <%= form.label :comment %><br>
-    <%= form.text_area :comment %>
-  </p>
-  <p>
-    <%= form.submit %>
-  </p>
+    .product {
+        border: 1px solid #ddd;
+        margin-bottom: 20px;
+        padding: 10px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .product:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .product img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .product-details {
+        display: none;
+    }
+
+    .product.active .product-details {
+        display: block;
+    }
+    </style>
+    <div class="container">
+        <h1><%= @product.title </h1>
+        <p><%= @product.desc %> </p>
+
+        <div class="flex-container">
+            <img src="https://m.media-amazon.com/images/I/7106ob3ATYL._AC_UF894,1000_QL80_.jpg" alt="Product Image" class="product-image" height="250" width="250">
+            <div>
+                <p class="price"> <%= @product.price %> </p>
+                <p class="stock"> <%= @product.stock %> </p>
+                 <button class="btn btn-primary">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h1>More Products</h1>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="product" onclick="toggleDetails(this)">
+                    <img src="https://m.media-amazon.com/images/I/71Er0a9stOL._AC_UF894,1000_QL80_.jpg" alt="Product Image" height="200" width="200">
+                    <h3>Product Name</h3>
+                    <p>$120.99</p>
+                    <div class="product-details">
+                        <p>Another World class Calculator</p>
+                        <button class="btn btn-primary">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="product" onclick="toggleDetails(this)">
+                    <img src="https://m.media-amazon.com/images/I/61jAcXAbZrL._AC_UF894,1000_QL80_.jpg" alt="Product Image" height="200" width="200">
+                    <h3>Product Name</h3>
+                    <p>$99.99</p>
+                    <div class="product-details">
+                        <p>Calculator 2</p>
+                        <button class="btn btn-primary">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="product" onclick="toggleDetails(this)">
+                    <img src="https://www.schoolmart.com/wp-content/uploads/2016/04/TI-30XS_MV_hi-1.jpg" alt="Product Image" height="200" width="200">
+                    <h3>Product Name</h3>
+                    <p>$59.99</p>
+                    <div class="product-details">
+                        <p>Calculator 3</p>
+                        <button class="btn btn-primary">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="product" onclick="toggleDetails(this)">
+                    <img src="https://www.schooldepot.co.nz/cdn/shop/products/Jastek-Scientific-Calculator-JasCS1.jpg?v=1656824191" alt="Product Image" height="200" width="200">
+                    <h3>Product Name</h3>
+                    <p>$48.99</p>
+                    <div class="product-details">
+                        <p>Calculator 4</p>
+                        <button class="btn btn-primary">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--The following elements are stored in conditionals-->
+<!-- Before we do that, we establish some boolean variables-->
+<% reviewed = (@reviews.length > 0) %>
+<% logged_in = (user_signed_in? and current_user.account_type == "b") %>
+<div class="container">
+<% if reviewed %>
+        <h2>Reviews for Scientific Calculator</h2>
+        <div class="toast-container position-static">
+        <% @reviews.each do |review| %>
+          <li>
+          <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <!--<img src="..." class="rounded me-2" alt="...">-->
+              <strong class="me-auto"> review.reviewer </strong>
+              <small> <%= ((Time.current - review.created_at)/1.day).round %></small>
+            </div>
+            <div class="toast-body">
+              <%= review.content %>
+            </div>
+          </div>
+          </li>
+        <% end %>
+        </div>
+<% end %>   
+<% if logged_in %>     
+        <h2>Tell us about the product</h2>
+        
+        <h4>Add a Review:</h4>
+        <form>
+            <p>
+                <label for="rating">Rating:</label><br>
+                <!-- Use stars for ratings -->
+                <span class="review-star">&#9733;</span>
+                <span class="review-star">&#9733;</span>
+                <span class="review-star">&#9733;</span>
+                <span class="review-star">&#9733;</span>
+                <span class="review-star">&#9733;</span>
+            </p>
+            <p>
+                <label for="content">What do you have to say?</label><br>
+                <textarea id="content" class="form-control"></textarea>
+            </p>
+            <p>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </p>
+        </form>
 <% end %>
+</div>
+</body>
+<script>
+   const stars = document.querySelectorAll('.review-star');
+
+stars.forEach(star => {
+    star.addEventListener('click', () => {
+        toggleStars(star);
+    });
+});
+
+function toggleStars(clickedStar) {
+    const clickedIndex = Array.from(stars).indexOf(clickedStar);
+
+    stars.forEach((star, index) => {
+        if (index <= clickedIndex) {
+            star.classList.add('active');
+        } else {
+            star.classList.remove('active');
+        }
+    });
+}
+
+function toggleDetails(element) {
+    element.classList.toggle('active');
+}
+</script> 
+
+</html>
