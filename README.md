@@ -32,4 +32,4 @@ cd your-repository-name
 - Run bundle install to install the gem.
 - Sign up for a Stripe account if you haven't already.
 - Obtain your Stripe API keys from the Stripe dashboard (test and live keys).
-- Configure Stripe in your Rails application by adding your API keys to the appropriate environment files (config/environments/development.rb
+- Configure Stripe in your Rails application by adding your API keys to the appropriate environment files (config/environments/development.rb) or whatever your filename.rb is.
